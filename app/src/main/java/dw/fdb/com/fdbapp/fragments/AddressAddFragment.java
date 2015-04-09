@@ -54,6 +54,7 @@ public class AddressAddFragment extends BaseFragment {
         getSpiceManager().execute(accesTokenRequest, new GetAccesTokenRequest());
     }
 
+
     private void storeInSharedPref(Token token) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         Editor edit = prefs.edit();
