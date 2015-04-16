@@ -24,7 +24,7 @@ import retrofit.RetrofitError;
 import retrofit.converter.GsonConverter;
 
 public class RestService extends RetrofitGsonSpiceService {
-    public String url = "http://142.4.211.181/deeptha/prestashop/ci/index.php/api";
+    public String url = "http://192.168.56.1/prestashop/ci/index.php/api";
 
     @Override
     protected String getServerUrl() {
