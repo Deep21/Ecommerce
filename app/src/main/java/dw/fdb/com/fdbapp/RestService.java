@@ -1,3 +1,4 @@
+
 package dw.fdb.com.fdbapp;
 
 import com.google.gson.GsonBuilder;
@@ -24,7 +25,7 @@ import retrofit.RetrofitError;
 import retrofit.converter.GsonConverter;
 
 public class RestService extends RetrofitGsonSpiceService {
-    public String url = "http://192.168.56.1/prestashop/ci/index.php/api";
+    public String url = "http://142.4.211.181/dwickrema/prestashop.v1/ci/index.php/api";
 
     @Override
     protected String getServerUrl() {
@@ -100,3 +101,4 @@ public class RestService extends RetrofitGsonSpiceService {
     }
 
 }
+
