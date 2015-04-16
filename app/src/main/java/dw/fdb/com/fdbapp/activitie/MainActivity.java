@@ -63,9 +63,10 @@ public class MainActivity extends BaseAbstractActivity implements CategoryListFr
 
             }
         });
-        addOrderListFragment();
+        //addOrderListFragment();
         //addHomeCustomerFragment();
-       // addConnexionFragment();
+        addConnexionFragment();
+
         //addCategoryFragment();
         //addProductListFragment();
         //addProductDetailFragment();
