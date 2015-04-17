@@ -10,6 +10,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.doomonafireball.betterpickers.calendardatepicker.CalendarDatePickerDialog;
@@ -20,12 +22,15 @@ import org.joda.time.DateTime;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 import dw.fdb.com.fdbapp.R;
 import dw.fdb.com.fdbapp.model.Customer;
+import dw.fdb.com.fdbapp.request.CustomerCreateRequest;
 
-public class CustomerCreateFragment extends BaseFragment implements CalendarDatePickerDialog.OnDateSetListener{
+public class CustomerCreateFragment extends BaseFragment implements CalendarDatePickerDialog.OnDateSetListener {
 
     public static final String TAG = "CustomerCreateFragment";
+    private static final String FRAG_TAG_DATE_PICKER = "fragment_date_picker_name";
     @InjectView(R.id.nom)
     TextView nom;
     @InjectView(R.id.prenom)
@@ -36,9 +41,17 @@ public class CustomerCreateFragment extends BaseFragment implements CalendarDate
     TextView pwd;
     @InjectView(R.id.pwd_confirm)
     TextView pwd_confirm;
+    @InjectView(R.id.radioSex)
+    RadioGroup radioSex;
+    @InjectView(R.id.year)
+    EditText year;
+    @InjectView(R.id.day)
+    EditText day;
+    @InjectView(R.id.mounth)
+    EditText mounth;
+
     View view;
     FragmentListner fragmentListner;
-    private static final String FRAG_TAG_DATE_PICKER = "fragment_date_picker_name";
 
     public static CustomerCreateFragment getInstance() {
         CustomerCreateFragment connexionFragment = new CustomerCreateFragment();
@@ -63,10 +76,16 @@ public class CustomerCreateFragment extends BaseFragment implements CalendarDate
         super.onViewCreated(view, savedInstanceState);
     }
 
+    @OnClick(R.id.date_picker)
+    public void onClick() {
+        popDatePicker();
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
     }
 
     private Customer getCustomer() {
@@ -76,47 +95,60 @@ public class CustomerCreateFragment extends BaseFragment implements CalendarDate
         customer.setEmail(email.getText().toString());
         customer.setPwd(pwd.getText().toString());
         customer.setPwdconfirmed(pwd_confirm.getText().toString());
-        return customer;
-    }
+        switch (radioSex.getCheckedRadioButtonId()) {
+            case R.id.m:
+                customer.setGender(1);
+                break;
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        MenuItem item = menu.add(Menu.NONE, R.id.add, 10, R.string.add);
-        item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-        super.onCreateOptionsMenu(menu, inflater);
-
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int itemId = item.getItemId();
-        switch (itemId) {
-            case R.id.add:
-                perform_request();
+            case R.id.mme:
+                customer.setGender(2);
+                break;
         }
-        return true;
-    }
+        customer.setBirthday(day.getText()+ "-" +mounth.getText()+ "-" + year.getText() );
+        return customer;
+        }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.reset(this);
+        @Override
+        public void onCreateOptionsMenu (Menu menu, MenuInflater inflater){
+            MenuItem item = menu.add(Menu.NONE, R.id.add, 10, R.string.add);
+            item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+            super.onCreateOptionsMenu(menu, inflater);
+
+        }
+
+        @Override
+        public boolean onOptionsItemSelected (MenuItem item){
+            int itemId = item.getItemId();
+            switch (itemId) {
+                case R.id.add:
+                    perform_request();
+            }
+            return true;
+        }
+
+        @Override
+        public void onDestroyView () {
+            super.onDestroyView();
+            ButterKnife.reset(this);
+        }
+
+    private void popDatePicker() {
+        FragmentManager fm = getChildFragmentManager();
+        DateTime now = DateTime.now();
+        CalendarDatePickerDialog calendarDatePickerDialog = CalendarDatePickerDialog.newInstance(CustomerCreateFragment.this, now.getYear(), now.getMonthOfYear() -1, now.getDayOfMonth());
+        calendarDatePickerDialog.show(fm, FRAG_TAG_DATE_PICKER);
     }
 
     private void perform_request() {
-        FragmentManager fm = getChildFragmentManager();
-        DateTime now = DateTime.now();
-        CalendarDatePickerDialog calendarDatePickerDialog = CalendarDatePickerDialog
-                .newInstance(CustomerCreateFragment.this, now.getYear(), now.getMonthOfYear() - 1,
-                        now.getDayOfMonth());
-        calendarDatePickerDialog.show(fm, FRAG_TAG_DATE_PICKER);
-
-//        CustomerCreateRequest customerCreateRequest = new CustomerCreateRequest(getCustomer());
-//        getSpiceManager().execute(customerCreateRequest, new CreateCustomerListner());
+        CustomerCreateRequest customerCreateRequest = new CustomerCreateRequest(getCustomer());
+        getSpiceManager().execute(customerCreateRequest, new CreateCustomerListner());
     }
 
     @Override
-    public void onDateSet(CalendarDatePickerDialog calendarDatePickerDialog, int i, int i2, int i3) {
+    public void onDateSet(CalendarDatePickerDialog calendarDatePickerDialog, int year, int mounth, int day) {
+        this.day.setText(""+day);
+        this.mounth.setText(""+mounth);
+        this.year.setText(""+year);
 
     }
 

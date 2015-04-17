@@ -20,7 +20,7 @@ public class Customer {
     @Expose
     private String pwdconfirmed;
     @Expose
-    private String gender;
+    private int gender;
     @Expose
     private String birthday;
     @Expose
@@ -131,14 +131,14 @@ public class Customer {
     /**
      * @return The gender
      */
-    public String getGender() {
+    public int getGender() {
         return gender;
     }
 
     /**
      * @param gender The gender
      */
-    public void setGender(String gender) {
+    public void setGender(int gender) {
         this.gender = gender;
     }
 

@@ -122,36 +122,36 @@
             style="@style/btn_yellow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Créer"
-            android:layout_marginTop="89dp"
-            android:layout_below="@+id/editText"
+            android:text="Créer un compte"
+            android:layout_marginTop="83dp"
+            android:layout_below="@+id/date_picker"
             android:layout_toRightOf="@+id/lbl_e_mail"
             android:layout_toEndOf="@+id/lbl_e_mail" />
 
         <RadioGroup
+            android:id="@+id/radioSex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/civilite"
             android:layout_below="@+id/civilite"
-            android:id="@+id/radioSex"
-            android:layout_marginTop="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_marginTop="20dp">
+
             <RadioButton
                 android:id="@+id/m"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checked="false"
-                android:text="M"
                 android:layout_centerVertical="true"
-   />
+                android:checked="false"
+                android:text="M" />
 
             <RadioButton
                 android:id="@+id/mme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checked="false"
-                android:text="Mme"
+                android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true" />
+                android:checked="false"
+                android:text="Mme" />
         </RadioGroup>
 
         <TextView
@@ -165,53 +165,57 @@
             android:text="Civilité"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
-        <EditText
-            style="@style/editText"
-            android:id="@+id/editText"
-            android:layout_width="230dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="39dp"
-            android:ems="10"
-            android:inputType="textPassword"
-            android:layout_below="@+id/radioSex"
-            android:layout_alignLeft="@+id/radioSex"
-            android:layout_alignStart="@+id/radioSex"
-            android:layout_alignRight="@+id/lbl_nom"
-            android:layout_alignEnd="@+id/lbl_nom" />
-
-        <EditText
-            style="@style/editText"
-            android:id="@+id/editText2"
-            android:layout_width="230dp"
-            android:layout_height="40dp"
-            android:ems="10"
-            android:inputType="textPassword"
-            android:layout_alignTop="@+id/editText"
-            android:layout_toRightOf="@+id/lbl_prenom"
-            android:layout_alignRight="@+id/lbl_pwd_confirm"
-            android:layout_alignEnd="@+id/lbl_pwd_confirm" />
-
-        <EditText
-            style="@style/editText"
-            android:id="@+id/editText3"
-            android:layout_width="230dp"
-            android:layout_height="40dp"
-            android:ems="10"
-            android:inputType="textPassword"
-            android:layout_alignTop="@+id/editText2"
-            android:layout_toRightOf="@+id/save"
-            android:layout_alignRight="@+id/pwd_confirm"
-            android:layout_alignEnd="@+id/pwd_confirm" />
-
         <TextView
             android:id="@+id/date_de_naissance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Date de naissance"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:layout_above="@+id/editText2"
-            android:layout_alignLeft="@+id/editText"
-            android:layout_alignStart="@+id/editText" />
+            android:layout_below="@+id/radioSex"
+            android:layout_marginTop="19dp"
+            android:layout_alignLeft="@+id/radioSex"
+            android:layout_alignStart="@+id/radioSex" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Choisir une date"
+            android:id="@+id/date_picker"
+            android:layout_marginTop="80dp"
+            android:layout_below="@+id/date_de_naissance"
+            android:layout_alignLeft="@+id/date_de_naissance"
+            android:layout_alignStart="@+id/date_de_naissance" />
+
+        <EditText
+            style="@style/editText"
+            android:id="@+id/year"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="33dp"
+            android:ems="10"
+            android:layout_below="@+id/date_de_naissance"
+            android:layout_alignRight="@+id/civilite"
+            android:layout_alignEnd="@+id/civilite" />
+
+        <EditText
+            style="@style/editText"
+            android:id="@+id/mounth"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:ems="10"
+            android:layout_alignTop="@+id/year"
+            android:layout_toLeftOf="@+id/day"
+            android:layout_toStartOf="@+id/day" />
+
+        <EditText
+            style="@style/editText"
+            android:id="@+id/day"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:ems="10"
+            android:layout_alignTop="@+id/mounth"
+            android:layout_alignRight="@+id/date_picker"
+            android:layout_alignEnd="@+id/date_picker" />
 
 
     </RelativeLayout>
