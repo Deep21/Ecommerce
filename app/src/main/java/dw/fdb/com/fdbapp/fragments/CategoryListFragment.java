@@ -23,7 +23,7 @@ import dw.fdb.com.fdbapp.request.CategoryGetRequest;
 public class CategoryListFragment extends BaseListFragment {
 
     public static final String TAG = "CartListFragment";
-    public static final String CAT_Id = "category_id";
+    public static final String CAT_ID = "category_id";
     public Icommunicator icommunicator;
     public FragmentListner fragmentSwitcherListner;
 
@@ -32,7 +32,7 @@ public class CategoryListFragment extends BaseListFragment {
     public static CategoryListFragment newInstance(int id) {
         CategoryListFragment categoryListFragment = new CategoryListFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt(CAT_Id, id);
+        bundle.putInt(CAT_ID, id);
         categoryListFragment.setArguments(bundle);
         return categoryListFragment;
     }
@@ -119,7 +119,7 @@ public class CategoryListFragment extends BaseListFragment {
 
     public void request_caregory() {
         if (getArguments() != null) {
-            int id_category = getArguments().getInt(CAT_Id);
+            int id_category = getArguments().getInt(CAT_ID);
             CategoryGetRequest categoryRequest = new CategoryGetRequest(id_category);
             getSpiceManager().execute(categoryRequest, new CategoryRequestListner());
         }

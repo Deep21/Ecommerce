@@ -108,38 +108,38 @@ public class CustomerCreateFragment extends BaseFragment implements CalendarDate
                 customer.setGender(2);
                 break;
         }
-        customer.setBirthday(year.getText() + "-" + mounth.getText()+ "-" +  day.getText() );
+        customer.setBirthday(year.getText() + "-" + mounth.getText() + "-" + day.getText());
         return customer;
-        }
+    }
 
-        @Override
-        public void onCreateOptionsMenu (Menu menu, MenuInflater inflater){
-            MenuItem item = menu.add(Menu.NONE, R.id.add, 10, R.string.add);
-            item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-            super.onCreateOptionsMenu(menu, inflater);
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        MenuItem item = menu.add(Menu.NONE, R.id.add, 10, R.string.add);
+        item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        super.onCreateOptionsMenu(menu, inflater);
 
-        }
+    }
 
-        @Override
-        public boolean onOptionsItemSelected (MenuItem item){
-            int itemId = item.getItemId();
-            switch (itemId) {
-                case R.id.add:
-                    perform_request();
-            }
-            return true;
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+        switch (itemId) {
+            case R.id.add:
+                perform_request();
         }
+        return true;
+    }
 
-        @Override
-        public void onDestroyView () {
-            super.onDestroyView();
-            ButterKnife.reset(this);
-        }
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.reset(this);
+    }
 
     private void popDatePicker() {
         FragmentManager fm = getChildFragmentManager();
         DateTime now = DateTime.now();
-        CalendarDatePickerDialog calendarDatePickerDialog = CalendarDatePickerDialog.newInstance(CustomerCreateFragment.this, now.getYear(), now.getMonthOfYear() -1, now.getDayOfMonth());
+        CalendarDatePickerDialog calendarDatePickerDialog = CalendarDatePickerDialog.newInstance(CustomerCreateFragment.this, now.getYear(), now.getMonthOfYear() - 1, now.getDayOfMonth());
         calendarDatePickerDialog.show(fm, FRAG_TAG_DATE_PICKER);
     }
 
@@ -150,9 +150,9 @@ public class CustomerCreateFragment extends BaseFragment implements CalendarDate
 
     @Override
     public void onDateSet(CalendarDatePickerDialog calendarDatePickerDialog, int year, int mounth, int day) {
-        this.day.setText(""+day);
-        this.mounth.setText(""+mounth);
-        this.year.setText(""+year);
+        this.day.setText("" + day);
+        this.mounth.setText("" + mounth);
+        this.year.setText("" + year);
 
     }
 
@@ -167,7 +167,7 @@ public class CustomerCreateFragment extends BaseFragment implements CalendarDate
                         case HttpStatus.SC_NOT_FOUND:
                             CustomerException customerException = (CustomerException) error.getBodyAs(CustomerException.class);
                             AppMsg.makeText(getActivity(), "e", AppMsg.STYLE_CONFIRM).show();
-                        break;
+                            break;
 
                     }
 
