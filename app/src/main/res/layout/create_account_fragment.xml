@@ -6,17 +6,17 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="494dp">
+        android:layout_height="900dp">
 
         <EditText
             android:id="@+id/prenom"
             style="@style/editText"
             android:layout_width="230dp"
             android:layout_height="40dp"
-            android:ems="10"
-            android:layout_below="@+id/lbl_prenom"
             android:layout_alignLeft="@+id/nom"
-            android:layout_alignStart="@+id/nom">
+            android:layout_alignStart="@+id/nom"
+            android:layout_below="@+id/lbl_prenom"
+            android:ems="10">
 
             <requestFocus />
         </EditText>
@@ -26,9 +26,9 @@
             style="@style/editText"
             android:layout_width="230dp"
             android:layout_height="40dp"
-            android:ems="10"
             android:layout_below="@+id/lbl_nom"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:ems="10" />
 
         <EditText
             android:id="@+id/email"
@@ -94,10 +94,10 @@
             style="@style/h1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/create_account"
+            android:layout_alignEnd="@+id/lbl_pwd"
             android:layout_alignParentTop="true"
             android:layout_alignRight="@+id/lbl_pwd"
-            android:layout_alignEnd="@+id/lbl_pwd" />
+            android:text="@string/create_account" />
 
         <TextView
             android:id="@+id/lbl_pwd_confirm"
@@ -118,14 +118,90 @@
             android:text="Votre mot de passe" />
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Créer"
             android:id="@+id/save"
             style="@style/btn_yellow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="23dp" />
+            android:layout_marginBottom="23dp"
+            android:text="Créer" />
+
+        <RadioGroup
+            android:layout_alignLeft="@+id/civilite"
+            android:layout_below="@+id/civilite"
+            android:layout_marginTop="10dp"
+            android:id="@+id/radioSex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/m"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="M"
+                android:layout_centerVertical="true"
+   />
+
+            <RadioButton
+                android:id="@+id/mme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="Mme"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/civilite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/pwd_confirm"
+            android:layout_alignStart="@+id/pwd_confirm"
+            android:layout_below="@+id/pwd_confirm"
+            android:layout_marginTop="10dp"
+            android:text="Civilité"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <EditText
+            style="@style/editText"
+            android:id="@+id/editText"
+            android:layout_width="230dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="39dp"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:layout_below="@+id/radioSex"
+            android:layout_alignLeft="@+id/radioSex"
+            android:layout_alignStart="@+id/radioSex"
+            android:layout_alignRight="@+id/lbl_nom"
+            android:layout_alignEnd="@+id/lbl_nom" />
+
+        <EditText
+            style="@style/editText"
+            android:id="@+id/editText2"
+            android:layout_width="230dp"
+            android:layout_height="40dp"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:layout_alignTop="@+id/editText"
+            android:layout_toRightOf="@+id/lbl_prenom"
+            android:layout_alignRight="@+id/lbl_pwd_confirm"
+            android:layout_alignEnd="@+id/lbl_pwd_confirm" />
+
+        <EditText
+            style="@style/editText"
+            android:id="@+id/editText3"
+            android:layout_width="230dp"
+            android:layout_height="40dp"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:layout_alignTop="@+id/editText2"
+            android:layout_toRightOf="@+id/save"
+            android:layout_alignRight="@+id/pwd_confirm"
+            android:layout_alignEnd="@+id/pwd_confirm" />
+
 
     </RelativeLayout>
 

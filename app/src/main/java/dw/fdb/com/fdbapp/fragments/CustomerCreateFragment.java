@@ -2,6 +2,7 @@ package dw.fdb.com.fdbapp.fragments;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -67,10 +68,10 @@ public class CustomerCreateFragment extends BaseFragment {
     private Customer getCustomer() {
         Customer customer = new Customer();
         customer.setFirstname(nom.getText().toString());
-        customer.setFirstname(prenom.getText().toString());
-        customer.setFirstname(email.getText().toString());
-        customer.setFirstname(pwd.getText().toString());
-        customer.setFirstname(pwd_confirm.getText().toString());
+        customer.setLastname(prenom.getText().toString());
+        customer.setEmail(email.getText().toString());
+        customer.setPwd(pwd.getText().toString());
+        customer.setPwdconfirmed(pwd_confirm.getText().toString());
         return customer;
     }
 
@@ -107,16 +108,17 @@ public class CustomerCreateFragment extends BaseFragment {
 
         @Override
         public void onRequestFailure(SpiceException e) {
-            System.out.println(e);
+
 
         }
 
         @Override
         public void onRequestSuccess(Customer customer) {
-            if (customer.getCode() == 201) {
-                System.out.println("ok");
-                fragmentListner.removeFragment(CustomerCreateFragment.this);
-            }
+            Log.e("CustomerCreateFragment", "" + customer);
+//            if (customer.getCode() == 201) {
+//                System.out.println("ok");
+//                fragmentListner.removeFragment(CustomerCreateFragment.this);
+//            }
 
         }
 
