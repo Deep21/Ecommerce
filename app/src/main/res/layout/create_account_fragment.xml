@@ -122,16 +122,17 @@
             style="@style/btn_yellow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="23dp"
-            android:text="Créer" />
+            android:text="Créer"
+            android:layout_marginTop="89dp"
+            android:layout_below="@+id/editText"
+            android:layout_toRightOf="@+id/lbl_e_mail"
+            android:layout_toEndOf="@+id/lbl_e_mail" />
 
         <RadioGroup
             android:layout_alignLeft="@+id/civilite"
             android:layout_below="@+id/civilite"
-            android:layout_marginTop="10dp"
             android:id="@+id/radioSex"
+            android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <RadioButton
@@ -201,6 +202,16 @@
             android:layout_toRightOf="@+id/save"
             android:layout_alignRight="@+id/pwd_confirm"
             android:layout_alignEnd="@+id/pwd_confirm" />
+
+        <TextView
+            android:id="@+id/date_de_naissance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date de naissance"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_above="@+id/editText2"
+            android:layout_alignLeft="@+id/editText"
+            android:layout_alignStart="@+id/editText" />
 
 
     </RelativeLayout>
