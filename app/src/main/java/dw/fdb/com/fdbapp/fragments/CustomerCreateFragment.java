@@ -14,10 +14,12 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.devspark.appmsg.AppMsg;
 import com.doomonafireball.betterpickers.calendardatepicker.CalendarDatePickerDialog;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 
+import org.apache.http.HttpStatus;
 import org.joda.time.DateTime;
 
 import butterknife.ButterKnife;
@@ -25,7 +27,9 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 import dw.fdb.com.fdbapp.R;
 import dw.fdb.com.fdbapp.model.Customer;
+import dw.fdb.com.fdbapp.model.CustomerException;
 import dw.fdb.com.fdbapp.request.CustomerCreateRequest;
+import retrofit.RetrofitError;
 
 public class CustomerCreateFragment extends BaseFragment implements CalendarDatePickerDialog.OnDateSetListener {
 
@@ -104,7 +108,7 @@ public class CustomerCreateFragment extends BaseFragment implements CalendarDate
                 customer.setGender(2);
                 break;
         }
-        customer.setBirthday(day.getText()+ "-" +mounth.getText()+ "-" + year.getText() );
+        customer.setBirthday(year.getText() + "-" + mounth.getText()+ "-" +  day.getText() );
         return customer;
         }
 
@@ -156,7 +160,19 @@ public class CustomerCreateFragment extends BaseFragment implements CalendarDate
 
         @Override
         public void onRequestFailure(SpiceException e) {
+            if (e.getCause() instanceof RetrofitError) {
+                RetrofitError error = (RetrofitError) e.getCause();
+                if (!error.isNetworkError()) {
+                    switch (error.getResponse().getStatus()) {
+                        case HttpStatus.SC_NOT_FOUND:
+                            CustomerException customerException = (CustomerException) error.getBodyAs(CustomerException.class);
+                            AppMsg.makeText(getActivity(), "e", AppMsg.STYLE_CONFIRM).show();
+                        break;
 
+                    }
+
+                }
+            }
         }
 
         @Override

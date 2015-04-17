@@ -19,13 +19,10 @@ public abstract class BaseRequestLisner<T> implements RequestListener<T>, OauthE
             RetrofitError error = (RetrofitError) e.getCause();
 
             if (!error.isNetworkError()) {
-
                 switch (error.getResponse().getStatus()) {
-
                     case HttpStatus.SC_UNAUTHORIZED:
                         AuthTokenException authTokenException = (AuthTokenException) error.getBodyAs(AuthTokenException.class);
                         onInvalidToken(authTokenException);
-
                         if (authTokenException.getErrorDescription().equals(OauthError.EXPIRED_MSG)) {
                             onExpiredToken(authTokenException);
                         }
