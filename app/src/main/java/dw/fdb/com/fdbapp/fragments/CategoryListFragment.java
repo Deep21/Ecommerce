@@ -18,31 +18,32 @@ import dw.fdb.com.fdbapp.R;
 import dw.fdb.com.fdbapp.adapter.CustomListAdapter;
 import dw.fdb.com.fdbapp.listner.BaseRequestLisner;
 import dw.fdb.com.fdbapp.model.Category;
+import dw.fdb.com.fdbapp.model.CategoryModel;
 import dw.fdb.com.fdbapp.request.CategoryGetRequest;
 
 public class CategoryListFragment extends BaseListFragment {
 
     public static final String TAG = "CartListFragment";
-    public static final String CAT_Id = "category_id";
+    public static final String CAT_ID = "id_category";
     public Icommunicator icommunicator;
     public FragmentListner fragmentSwitcherListner;
 
-    public List<Category> l;
+    public List<Category> listCategory;
 
     public static CategoryListFragment newInstance(int id) {
         CategoryListFragment categoryListFragment = new CategoryListFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt(CAT_Id, id);
+        bundle.putInt(CAT_ID, id);
         categoryListFragment.setArguments(bundle);
         return categoryListFragment;
     }
 
-    public List<Category> getL() {
-        return l;
+    public List<Category> getListCategory() {
+        return listCategory;
     }
 
-    public void setL(List<Category> l) {
-        this.l = l;
+    public void setListCategory(List<Category> listCategory) {
+        this.listCategory = listCategory;
     }
 
     @Override
@@ -119,7 +120,7 @@ public class CategoryListFragment extends BaseListFragment {
 
     public void request_caregory() {
         if (getArguments() != null) {
-            int id_category = getArguments().getInt(CAT_Id);
+            int id_category = getArguments().getInt(CAT_ID);
             CategoryGetRequest categoryRequest = new CategoryGetRequest(id_category);
             getSpiceManager().execute(categoryRequest, new CategoryRequestListner());
         }
@@ -129,7 +130,7 @@ public class CategoryListFragment extends BaseListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        int id_product = getL().get(position).getIdCategory();
+        int id_product = getListCategory().get(position).getIdCategory();
         System.out.println(id_product);
         ProductListFragment productListFragment = ProductListFragment.newInstance(id_product);
         fragmentSwitcherListner.replaceFragment(productListFragment, null);
@@ -141,7 +142,7 @@ public class CategoryListFragment extends BaseListFragment {
         public void switchFragment(int id, String fragmentTag);
     }
 
-    public class CategoryRequestListner extends BaseRequestLisner<Category.List> {
+    public class CategoryRequestListner extends BaseRequestLisner<CategoryModel> {
 
         @Override
         public void onRequestFailure(SpiceException e) {
@@ -149,9 +150,9 @@ public class CategoryListFragment extends BaseListFragment {
         }
 
         @Override
-        public void onRequestSuccess(Category.List category) {
-            setL(category);
-            CustomListAdapter customListAdapter = new CustomListAdapter(getActivity(), category);
+        public void onRequestSuccess(CategoryModel category) {
+            setListCategory(category.getCategory());
+            CustomListAdapter customListAdapter = new CustomListAdapter(getActivity(), category.getCategory());
             setListAdapter(customListAdapter);
         }
 

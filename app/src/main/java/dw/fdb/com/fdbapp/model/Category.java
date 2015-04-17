@@ -16,12 +16,27 @@ import dw.fdb.com.fdbapp.R;
 public class Category implements Item {
 
     public static final String ARGS_CATEGORY_ID = "id_category";
+    @Expose
+    private Details details;
     @SerializedName("id_category")
     @Expose
     private int idCategory;
     @Expose
     private String name;
 
+    /**
+     * @return The details
+     */
+    public Details getDetails() {
+        return details;
+    }
+
+    /**
+     * @param details The details
+     */
+    public void setDetails(Details details) {
+        this.details = details;
+    }
 
     /**
      * @return The idCategory

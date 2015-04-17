@@ -1,19 +1,19 @@
 package dw.fdb.com.fdbapp.request;
 
 
-import dw.fdb.com.fdbapp.model.Category;
+import dw.fdb.com.fdbapp.model.CategoryModel;
 import dw.fdb.com.fdbapp.ws.WSCategory;
 
-public class CategoryGetRequest extends BaseRequest<Category.List, WSCategory> {
+public class CategoryGetRequest extends BaseRequest<CategoryModel, WSCategory> {
 	int id;
 
 	public CategoryGetRequest(int id) {
-		super(Category.List.class, WSCategory.class);
+		super(CategoryModel.class, WSCategory.class);
 		this.id = id;
 	}
 
 	@Override
-	public Category.List loadDataFromNetwork() throws Exception {
+	public CategoryModel loadDataFromNetwork() throws Exception {
 		return getService().getChildrenCategory(id);
 
 	}
