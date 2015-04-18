@@ -3,13 +3,6 @@
     android:layout_height="fill_parent"
     android:orientation="vertical">
 
-    <dw.fdb.com.fdbapp.views.EndlessListView
-        android:id="@android:id/list"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_below="@+id/mLlayout1">
-
-    </dw.fdb.com.fdbapp.views.EndlessListView>
 
     <RelativeLayout
         android:id="@+id/mLlayout1"

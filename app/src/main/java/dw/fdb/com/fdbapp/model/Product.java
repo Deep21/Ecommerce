@@ -1,6 +1,5 @@
 package dw.fdb.com.fdbapp.model;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -1245,7 +1244,6 @@ public class Product implements Item {
         holder.description_short.setText(getDescriptionShort());
         holder.prix_ttc.setText(Integer.toString(getPriceTtc()));
         holder.stock.setText("En stock");
-        Log.i("Product", "" + getIdImage());
         Picasso.with(parent.getContext()).load(getUrlImage()).into(holder.product_image);
         return convertView;
     }

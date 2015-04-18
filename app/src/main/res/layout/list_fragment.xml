@@ -7,7 +7,9 @@
         android:id="@android:id/list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@+id/mLlayout1"></ListView>
+        android:layout_below="@+id/mLlayout1">
+
+    </ListView>
 
     <RelativeLayout
         android:id="@+id/mLlayout1"

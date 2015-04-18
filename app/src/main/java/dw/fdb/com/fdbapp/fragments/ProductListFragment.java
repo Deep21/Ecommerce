@@ -9,40 +9,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 import android.widget.ViewSwitcher;
 
 import com.octo.android.robospice.persistence.exception.SpiceException;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 import dw.fdb.com.fdbapp.R;
+import dw.fdb.com.fdbapp.adapter.CustomListAdapter;
 import dw.fdb.com.fdbapp.adapter.CustommListAdapter;
 import dw.fdb.com.fdbapp.listner.BaseRequestLisner;
 import dw.fdb.com.fdbapp.model.Category;
-import dw.fdb.com.fdbapp.model.Item;
 import dw.fdb.com.fdbapp.model.Product;
 import dw.fdb.com.fdbapp.model.ProductModel;
 import dw.fdb.com.fdbapp.request.ProductListGetRequest;
-import dw.fdb.com.fdbapp.views.EndlessListView;
 
-public class ProductListFragment extends BaseListFragment implements EndlessListView.EndlessListner {
+public class ProductListFragment extends BaseListFragment {
     public static final String TAG = "ProductListFragment";
     public FragmentListner fragmentSwitcherListner;
     ViewSwitcher switcher;
     ToggleButton toggleButton1;
     GridView gridView;
-    EndlessListView endlessListView = null;
-    @InjectView(R.id.nb_product)
-    TextView nb_product;
+
 
     private ProductModel productModel;
 
@@ -94,7 +84,7 @@ public class ProductListFragment extends BaseListFragment implements EndlessList
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.product_list_fragment, container, false);
+        View v = inflater.inflate(R.layout.list_fragment, container, false);
         ButterKnife.inject(this, v);
         /*switcher = (ViewSwitcher) v.findViewById(R.id.viewswitcher);
         toggleButton1 = (ToggleButton) v.findViewById(R.id.toggle);
@@ -106,14 +96,7 @@ public class ProductListFragment extends BaseListFragment implements EndlessList
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if (getListAdapter() != null && endlessListView != null) {
-            ((EndlessListView) getListView()).setListner(ProductListFragment.this);
-            CustommListAdapter customListAdapter = (CustommListAdapter) getListAdapter();
-            List<Item> i = customListAdapter.getCustomItems();
-            i.addAll(getProductModel().getProductList());
-            customListAdapter.notifyDataSetChanged();
-
-        }
+        CustommListAdapter customListAdapter = (CustommListAdapter) getListAdapter();
 
     }
 
@@ -165,31 +148,17 @@ public class ProductListFragment extends BaseListFragment implements EndlessList
 
     public void productRequest() {
         if (getArguments() != null) {
-            Map<String, String> filter = new HashMap<String, String>();
-            filter.put("filter", "manufacturer");
-            filter.put("value", "[3]");
-            int id_category = getArguments().getInt(Category.ARGS_CATEGORY_ID);
-            ProductListGetRequest productListGetRequest = new ProductListGetRequest(id_category, filter);
-            getSpiceManager().execute(productListGetRequest, new ProductRequestListner());
+            Log.i("ProductListFragment", ""+getArguments().getInt(Category.ARGS_CATEGORY_ID));
+//            Map<String, String> filter = new HashMap<String, String>();
+//            filter.put("filter", "manufacturer");
+//            filter.put("value", "[3]");
+              int id_category = getArguments().getInt(Category.ARGS_CATEGORY_ID);
+              ProductListGetRequest productListGetRequest = new ProductListGetRequest(id_category);
+              getSpiceManager().execute(productListGetRequest, new ProductRequestListner());
         }
 
     }
 
-    @Override
-    public void onLoadMore() {
-        Map<String, String> filter = new HashMap<String, String>();
-        Integer i = getProductModel().getNext();
-        if (i != 0) {
-            filter.put("per_page", "" + getProductModel().getNext());
-            int id_category = getArguments().getInt(Category.ARGS_CATEGORY_ID);
-            ProductListGetRequest productListGetRequest = new ProductListGetRequest(id_category, filter);
-            getSpiceManager().execute(productListGetRequest, new ProductRequestListner());
-
-
-        }
-
-
-    }
 
     ProductModel getProductModel() {
         return productModel;
@@ -210,25 +179,12 @@ public class ProductListFragment extends BaseListFragment implements EndlessList
         @Override
         public void onRequestSuccess(ProductModel product) {
             setProductModel(product);
-            nb_product.setText("" + product.getNbProducts());
-            if (getListAdapter() != null) {
-                EndlessListView endlessListView = (EndlessListView) getListView();
-                endlessListView.setListner(ProductListFragment.this);
-                CustommListAdapter customListAdapter = (CustommListAdapter) endlessListView.getAdapter();
-                List<Item> i = customListAdapter.getCustomItems();
-                i.addAll(getProductModel().getProductList());
-                customListAdapter.notifyDataSetChanged();
+            Log.i("ProductListFragment", ""+product);
 
-            } else {
-                List<Product> products = product.getProductList();
-                endlessListView = (EndlessListView) getListView();
-                endlessListView.setListner(ProductListFragment.this);
-                List<Item> it = new ArrayList<Item>();
-                it.addAll(products);
-                CustommListAdapter adapter = new CustommListAdapter(getActivity(), it);
-                setListAdapter(adapter);
+                CustomListAdapter customListAdapter = new CustomListAdapter(getActivity(), product.getProductList());
+                setListAdapter(customListAdapter);
 
-            }
+
 
         }
 
