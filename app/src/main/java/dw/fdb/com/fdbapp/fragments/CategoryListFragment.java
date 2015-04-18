@@ -24,11 +24,10 @@ import dw.fdb.com.fdbapp.request.CategoryGetRequest;
 public class CategoryListFragment extends BaseListFragment {
 
     public static final String TAG = "CartListFragment";
-<<<<<<< HEAD
+
     public static final String CAT_ID = "id_category";
-=======
-    public static final String CAT_ID = "category_id";
->>>>>>> master
+
+
     public Icommunicator icommunicator;
     public FragmentListner fragmentSwitcherListner;
 

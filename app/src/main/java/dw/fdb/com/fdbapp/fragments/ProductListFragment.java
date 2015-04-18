@@ -148,13 +148,13 @@ public class ProductListFragment extends BaseListFragment {
 
     public void productRequest() {
         if (getArguments() != null) {
-            Log.i("ProductListFragment", ""+getArguments().getInt(Category.ARGS_CATEGORY_ID));
+            Log.i("ProductListFragment", "" + getArguments().getInt(Category.ARGS_CATEGORY_ID));
 //            Map<String, String> filter = new HashMap<String, String>();
 //            filter.put("filter", "manufacturer");
 //            filter.put("value", "[3]");
-              int id_category = getArguments().getInt(Category.ARGS_CATEGORY_ID);
-              ProductListGetRequest productListGetRequest = new ProductListGetRequest(id_category);
-              getSpiceManager().execute(productListGetRequest, new ProductRequestListner());
+            int id_category = getArguments().getInt(Category.ARGS_CATEGORY_ID);
+            ProductListGetRequest productListGetRequest = new ProductListGetRequest(id_category);
+            getSpiceManager().execute(productListGetRequest, new ProductRequestListner());
         }
 
     }
@@ -179,11 +179,10 @@ public class ProductListFragment extends BaseListFragment {
         @Override
         public void onRequestSuccess(ProductModel product) {
             setProductModel(product);
-            Log.i("ProductListFragment", ""+product);
+            Log.i("ProductListFragment", "" + product);
 
-                CustomListAdapter customListAdapter = new CustomListAdapter(getActivity(), product.getProductList());
-                setListAdapter(customListAdapter);
-
+            CustomListAdapter customListAdapter = new CustomListAdapter(getActivity(), product.getProductList());
+            setListAdapter(customListAdapter);
 
 
         }
