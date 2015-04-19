@@ -134,7 +134,6 @@ public class CategoryListFragment extends BaseListFragment {
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
         int id_product = getListCategory().get(position).getIdCategory();
-        System.out.println(id_product);
         ProductListFragment productListFragment = ProductListFragment.newInstance(id_product);
         fragmentSwitcherListner.replaceFragment(productListFragment, null);
 

@@ -8,11 +8,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.devspark.appmsg.AppMsg;
 import com.octo.android.robospice.persistence.exception.SpiceException;
@@ -105,10 +105,11 @@ public class ProductDetailScrollFragment extends BaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        startPaypal();
-        EventBus.getDefault().register(this);
         setRetainInstance(true);
+        EventBus.getDefault().register(this);
+        //startPaypal();
         backgroundRequest();
+
 //        Log.e(TAG, "onCreate");
     }
 
@@ -160,7 +161,6 @@ public class ProductDetailScrollFragment extends BaseFragment {
     public void backgroundRequest() {
         if (getArguments() != null) {
             int id_product = getArguments().getInt(ProductModel.ARGS_PRODUCT_ID);
-//            Log.e("ProductDetailScrollFragment", "" + id_product);
             ProductDetailRequest productDetailRequest = new ProductDetailRequest(id_product);
             getSpiceManager().execute(productDetailRequest, new ProductRequestListner());
         }
@@ -314,7 +314,7 @@ public class ProductDetailScrollFragment extends BaseFragment {
             public void onRequestSuccess(CartProduct cp) {
                 if (cp != null) {
                     if (cp.isCreate() || cp.isUpdated())
-                        AppMsg.makeText(getActivity(), "Votre produit � bien �t� ajout�", AppMsg.STYLE_CONFIRM).show();
+                        AppMsg.makeText(getActivity(), "Votre produit à bien été ajouté", AppMsg.STYLE_CONFIRM).show();
                 }
 
             }
@@ -341,11 +341,12 @@ public class ProductDetailScrollFragment extends BaseFragment {
 
         @Override
         public void onRequestFailure(SpiceException fail) {
-            Toast.makeText(getActivity(), "FAIL", Toast.LENGTH_LONG).show();
+            Log.e("TEG", "FAIL");
         }
 
         @Override
         public void onRequestSuccess(Product product) {
+
             isOnRequestSuccessFinished = true;
             setProduct(product);
             setUpUi();

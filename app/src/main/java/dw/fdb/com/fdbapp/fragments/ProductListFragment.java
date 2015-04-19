@@ -19,7 +19,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import dw.fdb.com.fdbapp.R;
 import dw.fdb.com.fdbapp.adapter.CustomListAdapter;
-import dw.fdb.com.fdbapp.adapter.CustommListAdapter;
 import dw.fdb.com.fdbapp.listner.BaseRequestLisner;
 import dw.fdb.com.fdbapp.model.Category;
 import dw.fdb.com.fdbapp.model.Product;
@@ -64,7 +63,7 @@ public class ProductListFragment extends BaseListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        CustommListAdapter adapter = (CustommListAdapter) getListAdapter();
+        CustomListAdapter adapter = (CustomListAdapter) getListAdapter();
         if (adapter != null) {
             Product p = (Product) adapter.getItem(position);
             ProductDetailScrollFragment productDetailFragment = ProductDetailScrollFragment.newInstance(p.getIdProduct());
@@ -96,7 +95,6 @@ public class ProductListFragment extends BaseListFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        CustommListAdapter customListAdapter = (CustommListAdapter) getListAdapter();
 
     }
 
@@ -148,7 +146,6 @@ public class ProductListFragment extends BaseListFragment {
 
     public void productRequest() {
         if (getArguments() != null) {
-            Log.i("ProductListFragment", "" + getArguments().getInt(Category.ARGS_CATEGORY_ID));
 //            Map<String, String> filter = new HashMap<String, String>();
 //            filter.put("filter", "manufacturer");
 //            filter.put("value", "[3]");
@@ -172,15 +169,12 @@ public class ProductListFragment extends BaseListFragment {
 
         @Override
         public void onRequestFailure(SpiceException fail) {
-            System.out.println(fail);
             Toast.makeText(getActivity(), "FAIL", Toast.LENGTH_LONG).show();
         }
 
         @Override
         public void onRequestSuccess(ProductModel product) {
             setProductModel(product);
-            Log.i("ProductListFragment", "" + product);
-
             CustomListAdapter customListAdapter = new CustomListAdapter(getActivity(), product.getProductList());
             setListAdapter(customListAdapter);
 

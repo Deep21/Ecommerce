@@ -22,7 +22,8 @@
         android:text="TextView"
         android:layout_alignTop="@+id/product_image"
         android:layout_toRightOf="@+id/product_image"
-        android:layout_toEndOf="@+id/product_image" />
+        android:layout_toEndOf="@+id/product_image"
+        style="@style/Base.Theme.AppCompat.Light" />
 
     <TextView
         android:id="@+id/prix_ttc"
@@ -38,7 +39,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
-        android:layout_marginTop="20dp"
         android:layout_below="@+id/description_short"
         android:layout_toRightOf="@+id/product_image"
        />
