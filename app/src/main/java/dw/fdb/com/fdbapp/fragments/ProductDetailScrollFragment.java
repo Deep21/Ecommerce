@@ -235,14 +235,18 @@ public class ProductDetailScrollFragment extends BaseFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        PaymentConfirmation confirm = data.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
-        if (confirm != null) {
-            System.out.println(confirm.getPayment().toJSONObject());
-            System.out.println(confirm.getPayment().toString());
-            System.out.println(confirm.getProofOfPayment().toJSONObject());
-            System.out.println(confirm.getProofOfPayment().getPaymentId());
-            if (confirm.getProofOfPayment().getTransactionId() != null) {
-                System.out.println(confirm.getProofOfPayment().getTransactionId());
+        if (requestCode == REQUEST_CODE_PAYMENT) {
+            if (resultCode == Activity.RESULT_OK) {
+                PaymentConfirmation confirm = data.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
+                if (confirm != null) {
+                    System.out.println(confirm.getPayment().toJSONObject());
+                    System.out.println(confirm.getPayment().toString());
+                    System.out.println(confirm.getProofOfPayment().toJSONObject());
+                    System.out.println(confirm.getProofOfPayment().getPaymentId());
+                    if (confirm.getProofOfPayment().getTransactionId() != null) {
+                        System.out.println(confirm.getProofOfPayment().getTransactionId());
+                    }
+                }
             }
         }
     }
@@ -324,7 +328,7 @@ public class ProductDetailScrollFragment extends BaseFragment {
         // CartDisplayListFragment.newInstance();
         // fragmentListner.replaceFragment(cartListFragment, null);
         /*
-		 * if(isOnRequestSuccessFinished){ CartDisplayListFragment
+         * if(isOnRequestSuccessFinished){ CartDisplayListFragment
 		 * cartListFragment = CartDisplayListFragment.newInstance();
 		 * fragmentListner.replaceFragment(cartListFragment, null); }
 		 */
