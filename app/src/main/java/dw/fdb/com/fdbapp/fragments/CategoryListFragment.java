@@ -24,7 +24,7 @@ import dw.fdb.com.fdbapp.request.CategoryGetRequest;
 
 public class CategoryListFragment extends BaseListFragment {
 
-    public static final String TAG = "CartListFragment";
+    public static final String TAG = "CategoryListFragment";
 
     public static final String CAT_ID = "id_category";
 

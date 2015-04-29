@@ -30,9 +30,11 @@ import dw.fdb.com.fdbapp.request.OauthGetAccesTokenRequest;
 public class CartListFragment extends BaseListFragment {
 
     public static final String TAG = "CartListFragment";
+
     private static final int URL_LOADER = 0;
     long countItems;
     DaoSession daoSession;
+
     private FragmentListner fragmentSwitcherListner;
     private LoaderManager.LoaderCallbacks<Cursor> mCallbacks;
 
@@ -83,8 +85,8 @@ public class CartListFragment extends BaseListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        productRequest();
-        addProductToCartById();
+       // productRequest();
+       // addProductToCartById();
         /*daoSession = MyApplication.getDaoSession();
 		countItems = daoSession.getCartDao().count();*/
 
@@ -105,13 +107,6 @@ public class CartListFragment extends BaseListFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-		/*FragmentManager fragmentManager = (FragmentManager) getActivity().getSupportFragmentManager();
-		AddressAddFragment addFragment = (AddressAddFragment)fragmentManager.findFragmentByTag(AddressAddFragment.TAG);
-		if(addFragment==null){
-			addFragment =  AddressAddFragment.newInstance();
-			fragmentManager.beginTransaction().add(R.id.cart_container, addFragment, AddressAddFragment.TAG).commit();
-		}	*/
-
     }
 
 

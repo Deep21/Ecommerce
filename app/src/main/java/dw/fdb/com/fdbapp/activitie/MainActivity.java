@@ -14,11 +14,11 @@ import android.widget.Toast;
 
 import de.greenrobot.event.EventBus;
 import dw.fdb.com.fdbapp.R;
-import dw.fdb.com.fdbapp.fragments.cart.CartListFragment;
 import dw.fdb.com.fdbapp.fragments.CategoryListFragment;
 import dw.fdb.com.fdbapp.fragments.ConnexionFragment;
 import dw.fdb.com.fdbapp.fragments.CustomerHomeFragment;
 import dw.fdb.com.fdbapp.fragments.FragmentListner;
+import dw.fdb.com.fdbapp.fragments.cart.CartListFragment;
 import dw.fdb.com.fdbapp.fragments.order.OrderDetailScrollFragment;
 import dw.fdb.com.fdbapp.fragments.order.OrderListFragment;
 import dw.fdb.com.fdbapp.fragments.product.ProductDetailScrollFragment;
@@ -58,7 +58,11 @@ public class MainActivity extends BaseAbstractActivity implements CategoryListFr
                 cartListFragment = (CartListFragment) getSupportFragmentManager().findFragmentByTag(CartListFragment.TAG);
                 if (cartListFragment == null) {
                     cartListFragment = CartListFragment.newInstance();
-                    getSupportFragmentManager().beginTransaction().replace(R.id.frame, cartListFragment, CartListFragment.TAG).addToBackStack(null).commit();
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.frame, cartListFragment, CartListFragment.TAG)
+                            .addToBackStack(null)
+                            .commit();
                 }
 
             }
@@ -66,7 +70,7 @@ public class MainActivity extends BaseAbstractActivity implements CategoryListFr
         //addOrderListFragment();
         //addHomeCustomerFragment();
 
-       // addConnexionFragment();
+        // addConnexionFragment();
 
         addCategoryFragment();
         //addProductListFragment();

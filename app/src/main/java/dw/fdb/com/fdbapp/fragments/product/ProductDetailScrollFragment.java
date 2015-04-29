@@ -274,7 +274,7 @@ public class ProductDetailScrollFragment extends BaseFragment {
 
     @OnClick(R.id.add_to_cart)
     public void submit(View view) {
-        /*
+    /*
          * PAYMENT_INTENT_SALE will cause the payment to complete immediately.
          * Change PAYMENT_INTENT_SALE to
          *   - PAYMENT_INTENT_AUTHORIZE to only authorize payment and capture funds later.
@@ -284,20 +284,20 @@ public class ProductDetailScrollFragment extends BaseFragment {
          * Also, to include additional payment details and an item list, see getStuffToBuy() below.
          */
 
-        PayPalPayment thingToBuy = getStuffToBuy(PayPalPayment.PAYMENT_INTENT_SALE);
-
-        /*
-         * See getStuffToBuy(..) for examples of some available payment options.
-         */
-
-        Intent intent = new Intent(getActivity(), PaymentActivity.class);
-
-        // send the same configuration for restart resiliency
-        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
-
-        intent.putExtra(PaymentActivity.EXTRA_PAYMENT, thingToBuy);
-
-        startActivityForResult(intent, REQUEST_CODE_PAYMENT);
+//        PayPalPayment thingToBuy = getStuffToBuy(PayPalPayment.PAYMENT_INTENT_SALE);
+//
+//        /*
+//         * See getStuffToBuy(..) for examples of some available payment options.
+//         */
+//
+//        Intent intent = new Intent(getActivity(), PaymentActivity.class);
+//
+//        // send the same configuration for restart resiliency
+//        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
+//
+//        intent.putExtra(PaymentActivity.EXTRA_PAYMENT, thingToBuy);
+//
+//        startActivityForResult(intent, REQUEST_CODE_PAYMENT);
 
 
         Product product = getProduct();
@@ -315,7 +315,6 @@ public class ProductDetailScrollFragment extends BaseFragment {
         getSpiceManager().execute(new CartAddProductPostRequest(cartProduct, "up", preferences.getString(Token.BEARER_TOKEN, "")), new RequestListener<CartProduct>() {
             @Override
             public void onRequestFailure(SpiceException e) {
-
                 System.out.println(e);
             }
 
