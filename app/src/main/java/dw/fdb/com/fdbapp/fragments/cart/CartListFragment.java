@@ -24,7 +24,7 @@ import dw.fdb.com.fdbapp.model.CartProduct;
 import dw.fdb.com.fdbapp.model.Product;
 import dw.fdb.com.fdbapp.model.Token;
 import dw.fdb.com.fdbapp.request.CartAddProductPostRequest;
-import dw.fdb.com.fdbapp.request.CartGetProductRequest;
+import dw.fdb.com.fdbapp.request.CartCreatePostRequest;
 import dw.fdb.com.fdbapp.request.OauthGetAccesTokenRequest;
 
 public class CartListFragment extends BaseListFragment {
@@ -71,7 +71,7 @@ public class CartListFragment extends BaseListFragment {
 		if (getArguments() != null) {
         SharedPreferences preferences = getActivity().getSharedPreferences("customer", Context.MODE_PRIVATE);
         int id_cart = preferences.getInt("id_cart", 0);
-        CartGetProductRequest cartGetProductRequest = new CartGetProductRequest(id_cart, preferences.getString(Token.BEARER_TOKEN, ""));
+        CartCreatePostRequest cartCreatePostRequest = new CartCreatePostRequest();
         //getSpiceManager().execute(cartGetProductRequest, new CartProductRequestListner());
         }
     }

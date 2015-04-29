@@ -3,7 +3,6 @@ package dw.fdb.com.fdbapp.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.sql.Date;
 import java.util.List;
 
 public class Cart {
@@ -60,10 +59,10 @@ public class Cart {
     private boolean allow_seperated_package;
     @Expose
     @SerializedName("date_add")
-    private Date date_add;
+    private String date_add;
     @Expose
     @SerializedName("date_upd")
-    private Date date_upd;
+    private String date_upd;
 
     @Expose
     private CartItem cart;
@@ -235,19 +234,19 @@ public class Cart {
         this.allow_seperated_package = allow_seperated_package;
     }
 
-    public Date getDate_add() {
+    public String getDate_add() {
         return date_add;
     }
 
-    public void setDate_add(Date date_add) {
+    public void setDate_add(String date_add) {
         this.date_add = date_add;
     }
 
-    public Date getDate_upd() {
+    public String getDate_upd() {
         return date_upd;
     }
 
-    public void setDate_upd(Date date_upd) {
+    public void setDate_upd(String date_upd) {
         this.date_upd = date_upd;
     }
 }
