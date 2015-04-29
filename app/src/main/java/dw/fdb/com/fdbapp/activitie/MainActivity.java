@@ -14,15 +14,15 @@ import android.widget.Toast;
 
 import de.greenrobot.event.EventBus;
 import dw.fdb.com.fdbapp.R;
-import dw.fdb.com.fdbapp.fragments.CartListFragment;
+import dw.fdb.com.fdbapp.fragments.cart.CartListFragment;
 import dw.fdb.com.fdbapp.fragments.CategoryListFragment;
 import dw.fdb.com.fdbapp.fragments.ConnexionFragment;
 import dw.fdb.com.fdbapp.fragments.CustomerHomeFragment;
 import dw.fdb.com.fdbapp.fragments.FragmentListner;
-import dw.fdb.com.fdbapp.fragments.OrderDetailScrollFragment;
-import dw.fdb.com.fdbapp.fragments.OrderListFragment;
-import dw.fdb.com.fdbapp.fragments.ProductDetailScrollFragment;
-import dw.fdb.com.fdbapp.fragments.ProductListFragment;
+import dw.fdb.com.fdbapp.fragments.order.OrderDetailScrollFragment;
+import dw.fdb.com.fdbapp.fragments.order.OrderListFragment;
+import dw.fdb.com.fdbapp.fragments.product.ProductDetailScrollFragment;
+import dw.fdb.com.fdbapp.fragments.product.ProductListFragment;
 import dw.fdb.com.fdbapp.listner.OauthListner;
 import dw.fdb.com.fdbapp.model.AuthTokenException;
 import dw.fdb.com.fdbapp.model.Token;
@@ -67,8 +67,6 @@ public class MainActivity extends BaseAbstractActivity implements CategoryListFr
         //addHomeCustomerFragment();
 
        // addConnexionFragment();
-
-        //addConnexionFragment();
 
         addCategoryFragment();
         //addProductListFragment();

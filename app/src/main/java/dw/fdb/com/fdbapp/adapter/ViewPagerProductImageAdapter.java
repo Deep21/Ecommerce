@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.List;
 
-import dw.fdb.com.fdbapp.fragments.ProductImageFragment;
+import dw.fdb.com.fdbapp.fragments.product.ProductImageFragment;
 
 public class ViewPagerProductImageAdapter extends FragmentPagerAdapter {
 

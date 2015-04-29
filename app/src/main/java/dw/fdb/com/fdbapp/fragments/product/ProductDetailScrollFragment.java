@@ -1,4 +1,4 @@
-package dw.fdb.com.fdbapp.fragments;
+package dw.fdb.com.fdbapp.fragments.product;
 
 import android.app.Activity;
 import android.content.Context;
@@ -37,6 +37,8 @@ import butterknife.OnClick;
 import de.greenrobot.event.EventBus;
 import dw.fdb.com.fdbapp.R;
 import dw.fdb.com.fdbapp.adapter.ViewPagerProductImageAdapter;
+import dw.fdb.com.fdbapp.fragments.BaseFragment;
+import dw.fdb.com.fdbapp.fragments.FragmentListner;
 import dw.fdb.com.fdbapp.model.CartException;
 import dw.fdb.com.fdbapp.model.CartProduct;
 import dw.fdb.com.fdbapp.model.Image;
@@ -107,7 +109,7 @@ public class ProductDetailScrollFragment extends BaseFragment {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
         EventBus.getDefault().register(this);
-        //startPaypal();
+        startPaypal();
         backgroundRequest();
 
 //        Log.e(TAG, "onCreate");
@@ -235,14 +237,18 @@ public class ProductDetailScrollFragment extends BaseFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        PaymentConfirmation confirm = data.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
-        if (confirm != null) {
-            System.out.println(confirm.getPayment().toJSONObject());
-            System.out.println(confirm.getPayment().toString());
-            System.out.println(confirm.getProofOfPayment().toJSONObject());
-            System.out.println(confirm.getProofOfPayment().getPaymentId());
-            if (confirm.getProofOfPayment().getTransactionId() != null) {
-                System.out.println(confirm.getProofOfPayment().getTransactionId());
+        if (requestCode == REQUEST_CODE_PAYMENT) {
+            if (resultCode == Activity.RESULT_OK) {
+                PaymentConfirmation confirm = data.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
+                if (confirm != null) {
+                    System.out.println(confirm.getPayment().toJSONObject());
+                    System.out.println(confirm.getPayment().toString());
+                    System.out.println(confirm.getProofOfPayment().toJSONObject());
+                    System.out.println(confirm.getProofOfPayment().getPaymentId());
+                    if (confirm.getProofOfPayment().getTransactionId() != null) {
+                        System.out.println(confirm.getProofOfPayment().getTransactionId());
+                    }
+                }
             }
         }
     }
@@ -277,6 +283,7 @@ public class ProductDetailScrollFragment extends BaseFragment {
          *
          * Also, to include additional payment details and an item list, see getStuffToBuy() below.
          */
+
         PayPalPayment thingToBuy = getStuffToBuy(PayPalPayment.PAYMENT_INTENT_SALE);
 
         /*
@@ -304,9 +311,11 @@ public class ProductDetailScrollFragment extends BaseFragment {
         cartProduct.setIdShop(1);
         //cartProduct.setIdProductAttribute(getProduct().getIdProductAttribute());
         SharedPreferences preferences = getActivity().getSharedPreferences("customer", Context.MODE_PRIVATE);
+        //Ajout du produit au panier
         getSpiceManager().execute(new CartAddProductPostRequest(cartProduct, "up", preferences.getString(Token.BEARER_TOKEN, "")), new RequestListener<CartProduct>() {
             @Override
             public void onRequestFailure(SpiceException e) {
+
                 System.out.println(e);
             }
 
@@ -324,7 +333,7 @@ public class ProductDetailScrollFragment extends BaseFragment {
         // CartDisplayListFragment.newInstance();
         // fragmentListner.replaceFragment(cartListFragment, null);
         /*
-		 * if(isOnRequestSuccessFinished){ CartDisplayListFragment
+         * if(isOnRequestSuccessFinished){ CartDisplayListFragment
 		 * cartListFragment = CartDisplayListFragment.newInstance();
 		 * fragmentListner.replaceFragment(cartListFragment, null); }
 		 */

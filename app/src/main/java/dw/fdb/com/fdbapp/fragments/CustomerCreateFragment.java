@@ -31,6 +31,8 @@ import dw.fdb.com.fdbapp.model.CustomerException;
 import dw.fdb.com.fdbapp.request.CustomerCreateRequest;
 import retrofit.RetrofitError;
 
+import static com.devspark.appmsg.AppMsg.LENGTH_STICKY;
+
 public class CustomerCreateFragment extends BaseFragment implements CalendarDatePickerDialog.OnDateSetListener {
 
     public static final String TAG = "CustomerCreateFragment";
@@ -155,7 +157,18 @@ public class CustomerCreateFragment extends BaseFragment implements CalendarDate
         this.year.setText("" + year);
 
     }
+    static class CancelAppMsg implements View.OnClickListener {
+        private final AppMsg mAppMsg;
 
+        CancelAppMsg(AppMsg appMsg) {
+            mAppMsg = appMsg;
+        }
+
+        @Override
+        public void onClick(View v) {
+            mAppMsg.cancel();
+        }
+    }
     public class CreateCustomerListner implements RequestListener<Customer> {
 
         @Override
@@ -166,7 +179,13 @@ public class CustomerCreateFragment extends BaseFragment implements CalendarDate
                     switch (error.getResponse().getStatus()) {
                         case HttpStatus.SC_NOT_FOUND:
                             CustomerException customerException = (CustomerException) error.getBodyAs(CustomerException.class);
-                            AppMsg.makeText(getActivity(), "e", AppMsg.STYLE_CONFIRM).show();
+                            StringBuilder errors = new StringBuilder();
+
+                            AppMsg provided = AppMsg.makeText(getActivity(), ""+customerException.getMessage(), new AppMsg.Style(LENGTH_STICKY, android.R.color.holo_orange_light), R.layout.msg_error);
+                            provided.getView()
+                                    .findViewById(R.id.remove_btn)
+                                    .setOnClickListener(new  CancelAppMsg(provided));
+                            provided.show();
                             break;
 
                     }
@@ -177,7 +196,9 @@ public class CustomerCreateFragment extends BaseFragment implements CalendarDate
 
         @Override
         public void onRequestSuccess(Customer customer) {
-
+            if(customer !=null){
+                AppMsg.makeText(getActivity(), "Vottre compte a bien été créer", AppMsg.STYLE_INFO).show();
+            }
             Log.e("CustomerCreateFragment", "" + customer);
 //            if (customer.getCode() == 201) {
 //                System.out.println("ok");

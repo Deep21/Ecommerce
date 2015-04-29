@@ -1,4 +1,4 @@
-package dw.fdb.com.fdbapp.fragments;
+package dw.fdb.com.fdbapp.fragments.cart;
 
 import android.app.Activity;
 import android.content.Context;
@@ -16,6 +16,8 @@ import java.util.List;
 import butterknife.ButterKnife;
 import dw.fdb.com.fdbapp.R;
 import dw.fdb.com.fdbapp.db.DaoSession;
+import dw.fdb.com.fdbapp.fragments.BaseListFragment;
+import dw.fdb.com.fdbapp.fragments.FragmentListner;
 import dw.fdb.com.fdbapp.listner.BaseRequestLisner;
 import dw.fdb.com.fdbapp.model.AuthTokenException;
 import dw.fdb.com.fdbapp.model.CartProduct;

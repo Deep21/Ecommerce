@@ -1,4 +1,4 @@
-package dw.fdb.com.fdbapp.fragments;
+package dw.fdb.com.fdbapp.fragments.cart;
 
 import android.app.Activity;
 import android.os.Bundle;

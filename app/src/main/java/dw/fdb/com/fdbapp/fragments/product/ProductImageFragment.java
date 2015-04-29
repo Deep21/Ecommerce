@@ -1,4 +1,4 @@
-package dw.fdb.com.fdbapp.fragments;
+package dw.fdb.com.fdbapp.fragments.product;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

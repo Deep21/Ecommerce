@@ -1,4 +1,4 @@
-package dw.fdb.com.fdbapp.fragments;
+package dw.fdb.com.fdbapp.fragments.product;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -19,6 +19,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import dw.fdb.com.fdbapp.R;
 import dw.fdb.com.fdbapp.adapter.CustomListAdapter;
+import dw.fdb.com.fdbapp.fragments.BaseListFragment;
+import dw.fdb.com.fdbapp.fragments.FilterFragment;
+import dw.fdb.com.fdbapp.fragments.FragmentListner;
 import dw.fdb.com.fdbapp.listner.BaseRequestLisner;
 import dw.fdb.com.fdbapp.model.Category;
 import dw.fdb.com.fdbapp.model.Product;

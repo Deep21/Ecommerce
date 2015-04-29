@@ -1,4 +1,4 @@
-package dw.fdb.com.fdbapp.fragments;
+package dw.fdb.com.fdbapp.fragments.order;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -14,6 +14,7 @@ import com.octo.android.robospice.request.listener.RequestListener;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import dw.fdb.com.fdbapp.R;
+import dw.fdb.com.fdbapp.fragments.BaseFragment;
 import dw.fdb.com.fdbapp.listner.OauthListner;
 import dw.fdb.com.fdbapp.model.OrderHistory;
 import dw.fdb.com.fdbapp.request.OrderGetRequest;

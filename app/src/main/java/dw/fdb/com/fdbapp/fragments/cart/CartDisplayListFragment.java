@@ -1,4 +1,4 @@
-package dw.fdb.com.fdbapp.fragments;
+package dw.fdb.com.fdbapp.fragments.cart;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -19,6 +19,7 @@ import dw.fdb.com.fdbapp.activitie.MyApplication;
 import dw.fdb.com.fdbapp.adapter.CartCursorAdapter;
 import dw.fdb.com.fdbapp.db.CartDao;
 import dw.fdb.com.fdbapp.db.DaoSession;
+import dw.fdb.com.fdbapp.fragments.BaseListFragment;
 import dw.fdb.com.fdbapp.model.Cart;
 import dw.fdb.com.fdbapp.request.CartGetLastNoneOrderedCartRequest;
 
