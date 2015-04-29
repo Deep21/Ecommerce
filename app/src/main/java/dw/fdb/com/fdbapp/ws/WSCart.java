@@ -31,7 +31,7 @@ public interface WSCart {
                                       @Path("id_product") int id_product);
 
     @POST("/cart/create")
-    public Cart createCart(@Body Cart cart);
+    public Cart createCart();
 
     @POST("/cart/product/add")
     public CartProduct addProductToCartById(

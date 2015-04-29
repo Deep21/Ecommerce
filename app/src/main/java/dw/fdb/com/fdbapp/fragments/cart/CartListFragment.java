@@ -68,12 +68,12 @@ public class CartListFragment extends BaseListFragment {
     }
 
     public void productRequest() {
-//		if (getArguments() != null) {
+		if (getArguments() != null) {
         SharedPreferences preferences = getActivity().getSharedPreferences("customer", Context.MODE_PRIVATE);
         int id_cart = preferences.getInt("id_cart", 0);
         CartGetProductRequest cartGetProductRequest = new CartGetProductRequest(id_cart, preferences.getString(Token.BEARER_TOKEN, ""));
         //getSpiceManager().execute(cartGetProductRequest, new CartProductRequestListner());
-        //}
+        }
     }
 
     @Override
