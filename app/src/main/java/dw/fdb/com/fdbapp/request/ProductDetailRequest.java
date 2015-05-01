@@ -5,7 +5,7 @@ import android.util.Log;
 
 import com.octo.android.robospice.request.retrofit.RetrofitSpiceRequest;
 
-import dw.fdb.com.fdbapp.model.Product;
+import dw.fdb.com.fdbapp.model.product.Product;
 import dw.fdb.com.fdbapp.ws.WSProduct;
 
 public class ProductDetailRequest extends RetrofitSpiceRequest<Product, WSProduct> {

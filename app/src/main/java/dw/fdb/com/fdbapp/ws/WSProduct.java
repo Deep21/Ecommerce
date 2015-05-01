@@ -2,8 +2,8 @@ package dw.fdb.com.fdbapp.ws;
 
 import java.util.Map;
 
-import dw.fdb.com.fdbapp.model.Product;
-import dw.fdb.com.fdbapp.model.ProductModel;
+import dw.fdb.com.fdbapp.model.product.Product;
+import dw.fdb.com.fdbapp.model.product.ProductModel;
 import retrofit.http.GET;
 import retrofit.http.Path;
 import retrofit.http.QueryMap;

@@ -3,7 +3,7 @@ package dw.fdb.com.fdbapp.request;
 
 import java.util.Map;
 
-import dw.fdb.com.fdbapp.model.ProductModel;
+import dw.fdb.com.fdbapp.model.product.ProductModel;
 import dw.fdb.com.fdbapp.ws.WSProduct;
 
 

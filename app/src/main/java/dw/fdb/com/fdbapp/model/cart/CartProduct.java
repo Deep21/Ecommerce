@@ -1,4 +1,4 @@
-package dw.fdb.com.fdbapp.model;
+package dw.fdb.com.fdbapp.model.cart;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

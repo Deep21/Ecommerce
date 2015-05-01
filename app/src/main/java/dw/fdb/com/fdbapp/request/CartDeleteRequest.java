@@ -3,7 +3,7 @@ package dw.fdb.com.fdbapp.request;
 
 import com.octo.android.robospice.request.retrofit.RetrofitSpiceRequest;
 
-import dw.fdb.com.fdbapp.model.Cart;
+import dw.fdb.com.fdbapp.model.cart.Cart;
 import dw.fdb.com.fdbapp.ws.WSCart;
 
 public class CartDeleteRequest extends RetrofitSpiceRequest<Cart, WSCart> {

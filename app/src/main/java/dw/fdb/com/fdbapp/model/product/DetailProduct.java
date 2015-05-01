@@ -1,10 +1,12 @@
-package dw.fdb.com.fdbapp.model;
+package dw.fdb.com.fdbapp.model.product;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import dw.fdb.com.fdbapp.model.Image;
 
 
 public class DetailProduct {

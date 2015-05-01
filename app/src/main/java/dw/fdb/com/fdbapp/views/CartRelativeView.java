@@ -16,9 +16,9 @@ import butterknife.OnClick;
 import de.greenrobot.event.EventBus;
 import dw.fdb.com.fdbapp.R;
 import dw.fdb.com.fdbapp.activitie.MyApplication;
-import dw.fdb.com.fdbapp.db.Cart;
-import dw.fdb.com.fdbapp.db.CartDao;
-import dw.fdb.com.fdbapp.db.DaoSession;
+import dw.fdb.com.fdbapp.db.model.DBCartDao;
+import dw.fdb.com.fdbapp.db.model.DaoSession;
+import dw.fdb.com.fdbapp.model.cart.Cart;
 import dw.fdb.com.fdbapp.model.Item;
 
 ;
@@ -75,8 +75,8 @@ public class CartRelativeView extends RelativeLayout implements Item {
 	}
 
 	public void setData(Cart cart) {
-		libelle_produit.setText(cart.getLibelle_produit());
-		prix_ttc.setText(String.valueOf(cart.getPrix_ttc()));
+		//libelle_produit.setText(cart.getLibelle_produit());
+		//prix_ttc.setText(String.valueOf(cart.getPrix_ttc()));
 		this.cart = cart;
 	}
 	
@@ -88,9 +88,9 @@ public class CartRelativeView extends RelativeLayout implements Item {
 	
 	@OnClick(R.id.btn_qte)
 	public void btnQte() {
-		CartDao cartDao = daoSession.getCartDao();
-		cart.setLibelle_produit("eazf");
-		cartDao.update(cart);
+        DBCartDao cartDao = daoSession.getDBCartDao();
+		//cart.setLibelle_produit("eazf");
+		//cartDao.update(cart);
 		EventBus.getDefault().post(cart);
 		
 	}

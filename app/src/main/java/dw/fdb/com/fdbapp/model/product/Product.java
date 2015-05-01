@@ -1,4 +1,4 @@
-package dw.fdb.com.fdbapp.model;
+package dw.fdb.com.fdbapp.model.product;
 
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dw.fdb.com.fdbapp.R;
+import dw.fdb.com.fdbapp.model.Image;
+import dw.fdb.com.fdbapp.model.Item;
 
 public class Product implements Item {
 

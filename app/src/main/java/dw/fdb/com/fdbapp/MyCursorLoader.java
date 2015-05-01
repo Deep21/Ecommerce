@@ -6,7 +6,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.content.CursorLoader;
 
 import dw.fdb.com.fdbapp.activitie.MyApplication;
-import dw.fdb.com.fdbapp.db.DaoSession;
+import dw.fdb.com.fdbapp.db.model.DaoSession;
+
 
 public class MyCursorLoader extends CursorLoader {
     SQLiteDatabase db;
@@ -21,7 +22,7 @@ public class MyCursorLoader extends CursorLoader {
 
     @Override
     public Cursor loadInBackground() {
-        return db.query(daoSession.getCartDao().getTablename(), daoSession.getCartDao().getAllColumns(), null, null, null, null, null);
+        return db.query(daoSession.getDBCartDao().getTablename(), daoSession.getDBCartDao().getAllColumns(), null, null, null, null, null);
     }
 
 }

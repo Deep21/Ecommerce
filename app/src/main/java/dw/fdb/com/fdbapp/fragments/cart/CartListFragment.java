@@ -10,27 +10,33 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
+import com.octo.android.robospice.persistence.exception.SpiceException;
+import com.octo.android.robospice.request.listener.RequestListener;
+
+import java.util.Iterator;
 import java.util.List;
 
 import butterknife.ButterKnife;
 import dw.fdb.com.fdbapp.R;
-import dw.fdb.com.fdbapp.db.DaoSession;
+import dw.fdb.com.fdbapp.activitie.MyApplication;
+import dw.fdb.com.fdbapp.adapter.CustomListAdapter;
+import dw.fdb.com.fdbapp.db.model.DBCart;
+import dw.fdb.com.fdbapp.db.model.DaoSession;
 import dw.fdb.com.fdbapp.fragments.BaseListFragment;
 import dw.fdb.com.fdbapp.fragments.FragmentListner;
 import dw.fdb.com.fdbapp.listner.BaseRequestLisner;
 import dw.fdb.com.fdbapp.model.AuthTokenException;
-import dw.fdb.com.fdbapp.model.CartProduct;
-import dw.fdb.com.fdbapp.model.Product;
 import dw.fdb.com.fdbapp.model.Token;
-import dw.fdb.com.fdbapp.request.CartAddProductPostRequest;
+import dw.fdb.com.fdbapp.model.cart.CartModel;
+import dw.fdb.com.fdbapp.model.cart.CartProduct;
+import dw.fdb.com.fdbapp.model.product.Product;
 import dw.fdb.com.fdbapp.request.CartCreatePostRequest;
+import dw.fdb.com.fdbapp.request.CartGetProductRequest;
 import dw.fdb.com.fdbapp.request.OauthGetAccesTokenRequest;
 
 public class CartListFragment extends BaseListFragment {
 
     public static final String TAG = "CartListFragment";
-
     private static final int URL_LOADER = 0;
     long countItems;
     DaoSession daoSession;
@@ -43,22 +49,6 @@ public class CartListFragment extends BaseListFragment {
         return cartListFragment;
     }
 
-    //simule la lecture de la base de donn�e
-    private List<CartProduct> getLocalCart() {
-        List<CartProduct> cartProductList = new ArrayList<CartProduct>();
-        for (int i = 0; i < 5; i++) {
-            CartProduct cartProduct = new CartProduct();
-            cartProduct.setIdAddressDelivery(0);
-            cartProduct.setIdProductAttribute(18);
-            cartProduct.setIdProduct(1);
-            cartProduct.setIdCart(23);
-            cartProduct.setIdShop(1);
-            cartProduct.setQuantity(5);
-            cartProductList.add(cartProduct);
-        }
-
-        return cartProductList;
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -87,21 +77,21 @@ public class CartListFragment extends BaseListFragment {
         super.onCreate(savedInstanceState);
        // productRequest();
        // addProductToCartById();
-        /*daoSession = MyApplication.getDaoSession();
-		countItems = daoSession.getCartDao().count();*/
-
+        daoSession = MyApplication.getDaoSession();
+		List<DBCart> cart = daoSession.getDBCartDao().loadAll();
+        Iterator<DBCart> c = cart.iterator();
+        int id_cart = 0;
+        while (c.hasNext()){
+            DBCart dbCart = c.next();
+            id_cart = dbCart.getId_cart();
+        }
+        getProductCartById(id_cart);
     }
 
 
-    private void addProductToCartById() {
-        SharedPreferences preferences = getActivity().getSharedPreferences("customer", Context.MODE_PRIVATE);
-        List<CartProduct> list = getLocalCart();
-        for (CartProduct cartProduct : list) {
-            CartAddProductPostRequest addProductPostRequest = new CartAddProductPostRequest(cartProduct, "up", preferences.getString(Token.BEARER_TOKEN, ""));
-            getSpiceManager().execute(addProductPostRequest, new CartProductSaveRequestListner());
-        }
-
-
+    private void getProductCartById(int id_cart) {
+        CartGetProductRequest cartGetProductRequest = new CartGetProductRequest(id_cart, null);
+        getSpiceManager().execute(cartGetProductRequest, new CartGetRequestListner());
     }
 
     @Override
@@ -116,6 +106,24 @@ public class CartListFragment extends BaseListFragment {
         ButterKnife.reset(this);
     }
 
+    public class CartGetRequestListner implements RequestListener<CartModel> {
+
+        @Override
+        public void onRequestFailure(SpiceException spiceException) {
+
+        }
+
+        @Override
+        public void onRequestSuccess(CartModel cartProduct) {
+            try {
+              CustomListAdapter customListAdapter = new CustomListAdapter(getActivity(), cartProduct.getProductList());
+              setListAdapter(customListAdapter);
+            }catch (NullPointerException e){
+                System.out.printf(e.getMessage());
+            }
+
+        }
+    }
 
     public class CartProductSaveRequestListner extends BaseRequestLisner<CartProduct> {
         @Override

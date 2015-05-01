@@ -3,6 +3,8 @@ package dw.fdb.com.fdbapp.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import dw.fdb.com.fdbapp.model.cart.Cart;
+
 
 public class Customer {
 

@@ -1,9 +1,9 @@
 package dw.fdb.com.fdbapp.ws;
 
 
-import dw.fdb.com.fdbapp.model.Cart;
-import dw.fdb.com.fdbapp.model.CartProduct;
-import dw.fdb.com.fdbapp.model.Product;
+import dw.fdb.com.fdbapp.model.cart.Cart;
+import dw.fdb.com.fdbapp.model.cart.CartModel;
+import dw.fdb.com.fdbapp.model.cart.CartProduct;
 import retrofit.http.Body;
 import retrofit.http.DELETE;
 import retrofit.http.GET;
@@ -19,7 +19,7 @@ public interface WSCart {
     public Cart getLastNoneOrderedCart(@Path("id_customer") int id_customer);
 
     @GET("/cart/{id_cart}/product/get")
-    public Product.ProductList getProductCartById(@Path("id_cart") int id_cart,
+    public CartModel getProductCartById(@Path("id_cart") int id_cart,
                                                   @Header("Authorization") String token);
 
     @PUT("/cart/{id_cart}/product/edit")
@@ -33,8 +33,9 @@ public interface WSCart {
     @POST("/cart/create")
     public Cart createCart();
 
-    @POST("/cart/product/add")
+    @POST("/cart/{id_cart}/product/add")
     public CartProduct addProductToCartById(
+            @Path("id_cart") int id_cart,
             @Header("Authorization") String token,
             @Body CartProduct cartProduct, @Query("cart") String cart);
 

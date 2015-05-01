@@ -1,7 +1,7 @@
 package dw.fdb.com.fdbapp.request;
 
 
-import dw.fdb.com.fdbapp.model.Cart;
+import dw.fdb.com.fdbapp.model.cart.Cart;
 import dw.fdb.com.fdbapp.ws.WSCart;
 
 public class CartGetLastNoneOrderedCartRequest extends BaseRequest<Cart, WSCart> {

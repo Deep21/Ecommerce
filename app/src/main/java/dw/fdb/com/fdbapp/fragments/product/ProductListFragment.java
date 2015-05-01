@@ -24,8 +24,8 @@ import dw.fdb.com.fdbapp.fragments.FilterFragment;
 import dw.fdb.com.fdbapp.fragments.FragmentListner;
 import dw.fdb.com.fdbapp.listner.BaseRequestLisner;
 import dw.fdb.com.fdbapp.model.Category;
-import dw.fdb.com.fdbapp.model.Product;
-import dw.fdb.com.fdbapp.model.ProductModel;
+import dw.fdb.com.fdbapp.model.product.Product;
+import dw.fdb.com.fdbapp.model.product.ProductModel;
 import dw.fdb.com.fdbapp.request.ProductListGetRequest;
 
 public class ProductListFragment extends BaseListFragment {
@@ -117,7 +117,6 @@ public class ProductListFragment extends BaseListFragment {
 
     @Override
     public void onStop() {
-        // TODO Auto-generated method stub
         super.onStop();
         Log.e("ProductListFragment", "onStop");
         // Toast.makeText(getActivity(),
@@ -180,7 +179,6 @@ public class ProductListFragment extends BaseListFragment {
             setProductModel(product);
             CustomListAdapter customListAdapter = new CustomListAdapter(getActivity(), product.getProductList());
             setListAdapter(customListAdapter);
-
 
         }
 

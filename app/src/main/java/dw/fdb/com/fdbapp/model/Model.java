@@ -10,6 +10,9 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
+import dw.fdb.com.fdbapp.model.product.DetailProduct;
+import dw.fdb.com.fdbapp.model.product.ProductModel;
+
 public class Model {
 
 	@Expose
