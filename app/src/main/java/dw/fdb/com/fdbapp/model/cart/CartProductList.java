@@ -21,6 +21,8 @@ import dw.fdb.com.fdbapp.model.Image;
 import dw.fdb.com.fdbapp.model.Item;
 
 public class CartProductList implements Item {
+
+
     @SerializedName("id_address_delivery")
     @Expose
     private int id_address_delivery;
@@ -1316,6 +1318,7 @@ public class CartProductList implements Item {
     public void setId_address_delivery(int id_address_delivery) {
         this.id_address_delivery = id_address_delivery;
     }
+
 
 
     final public  static class ViewHolder {

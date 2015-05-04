@@ -9,6 +9,7 @@ import android.support.v4.app.LoaderManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.devspark.appmsg.AppMsg;
 import com.octo.android.robospice.persistence.exception.SpiceException;
@@ -18,6 +19,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import butterknife.ButterKnife;
+import butterknife.InjectView;
 import dw.fdb.com.fdbapp.R;
 import dw.fdb.com.fdbapp.activitie.MyApplication;
 import dw.fdb.com.fdbapp.adapter.CustomListAdapter;
@@ -34,7 +36,6 @@ import dw.fdb.com.fdbapp.model.cart.CartProduct;
 import dw.fdb.com.fdbapp.model.cart.CartProductList;
 import dw.fdb.com.fdbapp.model.product.Product;
 import dw.fdb.com.fdbapp.request.CartAddProductPostRequest;
-import dw.fdb.com.fdbapp.request.CartCreatePostRequest;
 import dw.fdb.com.fdbapp.request.CartDeleteRequest;
 import dw.fdb.com.fdbapp.request.CartEditProductRequest;
 import dw.fdb.com.fdbapp.request.CartGetProductRequest;
@@ -43,10 +44,11 @@ import dw.fdb.com.fdbapp.request.OauthGetAccesTokenRequest;
 public class CartListFragment extends BaseListFragment implements CustomListAdapter.AdapterOnClickListner {
 
     public static final String TAG = "CartListFragment";
-    private static final int URL_LOADER = 0;
     long countItems;
     DaoSession daoSession;
     CustomListAdapter customListAdapter;
+    @InjectView(R.id.qte)
+    TextView nb_product;
 
     private FragmentListner fragmentSwitcherListner;
     private LoaderManager.LoaderCallbacks<Cursor> mCallbacks;
@@ -64,14 +66,6 @@ public class CartListFragment extends BaseListFragment implements CustomListAdap
         return view;
     }
 
-    public void productRequest() {
-        if (getArguments() != null) {
-            SharedPreferences preferences = getActivity().getSharedPreferences("customer", Context.MODE_PRIVATE);
-            int id_cart = preferences.getInt("id_cart", 0);
-            CartCreatePostRequest cartCreatePostRequest = new CartCreatePostRequest();
-            //getSpiceManager().execute(cartGetProductRequest, new CartProductRequestListner());
-        }
-    }
 
     @Override
     public void onAttach(Activity activity) {
@@ -125,7 +119,9 @@ public class CartListFragment extends BaseListFragment implements CustomListAdap
             @Override
             public void onRequestSuccess(CartProduct cartProduct) {
                 try {
+
                     getProductCartById(id_cart);
+
                 } catch (NullPointerException e) {
 
                 }
@@ -133,7 +129,7 @@ public class CartListFragment extends BaseListFragment implements CustomListAdap
         });
     }
 
-    private void deleteProductCartById(int id_cart, int id_product, int id_product_attribute, int id_address) {
+    private void deleteProductCartById(final int id_cart, int id_product, int id_product_attribute, int id_address) {
         CartDeleteRequest cartDeleteRequest = new CartDeleteRequest(id_cart, id_product, id_product_attribute, id_address);
         getSpiceManager().execute(cartDeleteRequest, new RequestListener<Cart>() {
             @Override
@@ -144,6 +140,7 @@ public class CartListFragment extends BaseListFragment implements CustomListAdap
             @Override
             public void onRequestSuccess(Cart cart) {
                 AppMsg.makeText(getActivity(), "Votre produit à bien été retiré du panier", AppMsg.STYLE_CONFIRM).show();
+                getProductCartById(id_cart);
             }
         });
     }
@@ -224,6 +221,7 @@ public class CartListFragment extends BaseListFragment implements CustomListAdap
         @Override
         public void onRequestSuccess(CartModel cartProduct) {
             try {
+                nb_product.setText(String.valueOf(cartProduct.getNb_product()));
                 customListAdapter.setCustomItems(cartProduct.getProductList());
                 setListAdapter(customListAdapter);
                 customListAdapter.setOnClickListner(CartListFragment.this);

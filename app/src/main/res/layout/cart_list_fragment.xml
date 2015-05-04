@@ -33,15 +33,37 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_marginLeft="16dp"
-            android:text="TextView" />
+            android:text="2" />
 
         <TextView
             android:id="@+id/prix_ttc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/qte"
+            android:text="Total"
+            android:layout_alignTop="@+id/textView3"
+            android:layout_toRightOf="@+id/textView3"
+            android:layout_toEndOf="@+id/textView3"
+            android:layout_marginLeft="5dp" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Articles"
+            android:layout_above="@+id/prix_ttc"
+            android:layout_toRightOf="@+id/qte"
+            android:layout_toEndOf="@+id/qte"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="24dp" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="54"
             android:layout_below="@+id/qte"
-            android:text="TextView" />
+            android:layout_alignLeft="@+id/qte"
+            android:layout_alignStart="@+id/qte" />
 
     </RelativeLayout>
 
