@@ -12,7 +12,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import dw.fdb.com.fdbapp.model.Commande;
-import dw.fdb.com.fdbapp.model.OrderHistory;
+import dw.fdb.com.fdbapp.model.order.OrderHistory;
 
 public class OrderDetailRelativeView extends RelativeLayout {
     public static final int TEXT_SIZE = 12;

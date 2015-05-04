@@ -1,7 +1,7 @@
 package dw.fdb.com.fdbapp.request;
 
 
-import dw.fdb.com.fdbapp.model.OrderHistory;
+import dw.fdb.com.fdbapp.model.order.OrderHistory;
 import dw.fdb.com.fdbapp.ws.WSOrder;
 
 public class OrderGetByCustomerRequest extends BaseRequest<OrderHistory.OrderList, WSOrder>{

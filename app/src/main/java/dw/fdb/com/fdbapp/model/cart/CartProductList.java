@@ -3,6 +3,8 @@ package dw.fdb.com.fdbapp.model.cart;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,10 +16,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dw.fdb.com.fdbapp.R;
+import dw.fdb.com.fdbapp.adapter.CustomListAdapter;
 import dw.fdb.com.fdbapp.model.Image;
 import dw.fdb.com.fdbapp.model.Item;
 
 public class CartProductList implements Item {
+    @SerializedName("id_address_delivery")
+    @Expose
+    private int id_address_delivery;
+    @SerializedName("id_cart")
+    @Expose
+    private int idCart;
     @SerializedName("id_product")
     @Expose
     private int idProduct;
@@ -1228,23 +1237,57 @@ public class CartProductList implements Item {
     }
 
     @Override
-    public View getView(LayoutInflater inflator, View convertView, ViewGroup parent, int position) {
+    public View getView(LayoutInflater inflator, View convertView, ViewGroup parent, final int position, final CustomListAdapter.AdapterOnClickListner adapterOnClickListner) {
         ViewHolder holder;
+        System.out.println(position);
         if (convertView == null) {
             holder = new ViewHolder();
-            convertView = inflator.inflate(R.layout.product_list_layout, parent, false);
+            convertView = inflator.inflate(R.layout.cart_list_layout, parent, false);
+
             holder.libelle_produit = (TextView) convertView.findViewById(R.id.libelle_produit);
+            holder.qty_edit_text = (EditText) convertView.findViewById(R.id.qty_edit_text);
             holder.prix_ttc = (TextView) convertView.findViewById(R.id.prix_ttc);
             holder.stock = (TextView) convertView.findViewById(R.id.stock);
             holder.product_image = (ImageView) convertView.findViewById(R.id.product_image);
+            holder.increment = (ImageView) convertView.findViewById(R.id.increment);
+            holder.decrement = (ImageView) convertView.findViewById(R.id.decrement);
+            holder.delete_cart = (Button) convertView.findViewById(R.id.delete_cart);
+            holder.increment.setTag(Integer.valueOf(position));
+            holder.decrement.setTag(Integer.valueOf(position));
             convertView.setTag(holder);
+
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
+
+        holder.increment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adapterOnClickListner.buttonClicked(v, position);
+            }
+        });
+        holder.decrement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adapterOnClickListner.buttonClicked(v, position);
+
+            }
+        });
+
+        holder.delete_cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adapterOnClickListner.buttonClicked(v, position);
+
+            }
+        });
+
         holder.libelle_produit.setText(getProduit());
         holder.prix_ttc.setText(Integer.toString(getPriceTtc()));
         holder.stock.setText("En stock");
+        holder.qty_edit_text.setText("" + getQuantity());
         Picasso.with(parent.getContext()).load(getUrlImage()).into(holder.product_image);
+
         return convertView;
     }
 
@@ -1258,12 +1301,33 @@ public class CartProductList implements Item {
         return 0;
     }
 
+    public int getIdCart() {
+        return idCart;
+    }
 
-    public static class ViewHolder {
+    public void setIdCart(int idCart) {
+        this.idCart = idCart;
+    }
+
+    public int getId_address_delivery() {
+        return id_address_delivery;
+    }
+
+    public void setId_address_delivery(int id_address_delivery) {
+        this.id_address_delivery = id_address_delivery;
+    }
+
+
+    final public  static class ViewHolder {
         TextView libelle_produit;
         TextView prix_ttc;
         TextView stock;
+        Button delete_cart;
+        EditText qty_edit_text;
         ImageView product_image;
+        ImageView increment;
+        ImageView decrement;
+
 
     }
 

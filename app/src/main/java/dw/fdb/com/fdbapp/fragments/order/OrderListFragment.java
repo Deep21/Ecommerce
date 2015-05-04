@@ -20,7 +20,7 @@ import dw.fdb.com.fdbapp.fragments.FragmentListner;
 import dw.fdb.com.fdbapp.listner.BaseRequestLisner;
 import dw.fdb.com.fdbapp.listner.OauthListner;
 import dw.fdb.com.fdbapp.model.AuthTokenException;
-import dw.fdb.com.fdbapp.model.OrderHistory;
+import dw.fdb.com.fdbapp.model.order.OrderHistory;
 import dw.fdb.com.fdbapp.request.OrderGetByCustomerRequest;
 
 public class OrderListFragment extends BaseListFragment {

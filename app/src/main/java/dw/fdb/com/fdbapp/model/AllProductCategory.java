@@ -21,8 +21,7 @@ public class AllProductCategory implements Item{
 	}
 
 	@Override
-	public View getView(LayoutInflater inflator, View convertView,
-			ViewGroup parent, int position) {
+	public View getView(LayoutInflater inflator, View convertView, ViewGroup parent, int position, CustomListAdapter.AdapterOnClickListner adapterOnClickListner) {
 		// TODO Auto-generated method stub
 		return null;
 	}

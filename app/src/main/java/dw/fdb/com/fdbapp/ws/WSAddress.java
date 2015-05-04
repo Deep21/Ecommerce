@@ -1,6 +1,6 @@
 package dw.fdb.com.fdbapp.ws;
 
-import dw.fdb.com.fdbapp.model.OrderHistory;
+import dw.fdb.com.fdbapp.model.order.OrderHistory;
 import retrofit.http.Body;
 import retrofit.http.DELETE;
 import retrofit.http.GET;

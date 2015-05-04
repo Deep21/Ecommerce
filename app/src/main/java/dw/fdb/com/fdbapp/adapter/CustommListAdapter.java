@@ -14,11 +14,10 @@ public class CustommListAdapter extends BaseAdapter {
     List<Item> items;
     LayoutInflater inflator;
     Context context;
+
     public CustommListAdapter(Context context, List<Item> items) {
         this.items = items;
         this.context = context;
-
-
     }
 
     public List<Item> getCustomItems() {
@@ -53,9 +52,9 @@ public class CustommListAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             inflator = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            return items.get(position).getView(inflator, convertView, parent, 0);
+            return items.get(position).getView(inflator, convertView, parent, position, null);
         }
-        return items.get(position).getView(inflator, convertView, parent, 0);
+        return items.get(position).getView(inflator, convertView, parent, position, null);
     }
 
     public enum RowType {

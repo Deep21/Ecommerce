@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.devspark.appmsg.AppMsg;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 
@@ -27,19 +28,25 @@ import dw.fdb.com.fdbapp.fragments.FragmentListner;
 import dw.fdb.com.fdbapp.listner.BaseRequestLisner;
 import dw.fdb.com.fdbapp.model.AuthTokenException;
 import dw.fdb.com.fdbapp.model.Token;
+import dw.fdb.com.fdbapp.model.cart.Cart;
 import dw.fdb.com.fdbapp.model.cart.CartModel;
 import dw.fdb.com.fdbapp.model.cart.CartProduct;
+import dw.fdb.com.fdbapp.model.cart.CartProductList;
 import dw.fdb.com.fdbapp.model.product.Product;
+import dw.fdb.com.fdbapp.request.CartAddProductPostRequest;
 import dw.fdb.com.fdbapp.request.CartCreatePostRequest;
+import dw.fdb.com.fdbapp.request.CartDeleteRequest;
+import dw.fdb.com.fdbapp.request.CartEditProductRequest;
 import dw.fdb.com.fdbapp.request.CartGetProductRequest;
 import dw.fdb.com.fdbapp.request.OauthGetAccesTokenRequest;
 
-public class CartListFragment extends BaseListFragment {
+public class CartListFragment extends BaseListFragment implements CustomListAdapter.AdapterOnClickListner {
 
     public static final String TAG = "CartListFragment";
     private static final int URL_LOADER = 0;
     long countItems;
     DaoSession daoSession;
+    CustomListAdapter customListAdapter;
 
     private FragmentListner fragmentSwitcherListner;
     private LoaderManager.LoaderCallbacks<Cursor> mCallbacks;
@@ -58,11 +65,11 @@ public class CartListFragment extends BaseListFragment {
     }
 
     public void productRequest() {
-		if (getArguments() != null) {
-        SharedPreferences preferences = getActivity().getSharedPreferences("customer", Context.MODE_PRIVATE);
-        int id_cart = preferences.getInt("id_cart", 0);
-        CartCreatePostRequest cartCreatePostRequest = new CartCreatePostRequest();
-        //getSpiceManager().execute(cartGetProductRequest, new CartProductRequestListner());
+        if (getArguments() != null) {
+            SharedPreferences preferences = getActivity().getSharedPreferences("customer", Context.MODE_PRIVATE);
+            int id_cart = preferences.getInt("id_cart", 0);
+            CartCreatePostRequest cartCreatePostRequest = new CartCreatePostRequest();
+            //getSpiceManager().execute(cartGetProductRequest, new CartProductRequestListner());
         }
     }
 
@@ -75,13 +82,14 @@ public class CartListFragment extends BaseListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // productRequest();
-       // addProductToCartById();
+        // productRequest();
+        // addProductToCartById();
         daoSession = MyApplication.getDaoSession();
-		List<DBCart> cart = daoSession.getDBCartDao().loadAll();
+        customListAdapter = new CustomListAdapter(getActivity(), null);
+        List<DBCart> cart = daoSession.getDBCartDao().loadAll();
         Iterator<DBCart> c = cart.iterator();
         int id_cart = 0;
-        while (c.hasNext()){
+        while (c.hasNext()) {
             DBCart dbCart = c.next();
             id_cart = dbCart.getId_cart();
         }
@@ -92,6 +100,52 @@ public class CartListFragment extends BaseListFragment {
     private void getProductCartById(int id_cart) {
         CartGetProductRequest cartGetProductRequest = new CartGetProductRequest(id_cart, null);
         getSpiceManager().execute(cartGetProductRequest, new CartGetRequestListner());
+    }
+
+    private void addProductToCartById(CartProductList cartProductList, String param) {
+        int id_product_attribut = cartProductList.getIdProductAttribute();
+        int id_product = cartProductList.getIdProduct();
+        final int id_cart = cartProductList.getIdCart();
+        int id_address_delivery = cartProductList.getId_address_delivery();
+
+        CartProduct cartProduct = new CartProduct();
+        cartProduct.setIdCart(id_cart);
+        cartProduct.setIdAddressDelivery(id_address_delivery);
+        cartProduct.setIdProduct(id_product);
+        cartProduct.setIdProductAttribute(id_product_attribut);
+        cartProduct.setQuantity(1);
+
+        CartAddProductPostRequest cartAddProductPostRequest = new CartAddProductPostRequest(id_cart, cartProduct, param, null);
+        getSpiceManager().execute(cartAddProductPostRequest, new RequestListener<CartProduct>() {
+            @Override
+            public void onRequestFailure(SpiceException spiceException) {
+
+            }
+
+            @Override
+            public void onRequestSuccess(CartProduct cartProduct) {
+                try {
+                    getProductCartById(id_cart);
+                } catch (NullPointerException e) {
+
+                }
+            }
+        });
+    }
+
+    private void deleteProductCartById(int id_cart, int id_product, int id_product_attribute, int id_address) {
+        CartDeleteRequest cartDeleteRequest = new CartDeleteRequest(id_cart, id_product, id_product_attribute, id_address);
+        getSpiceManager().execute(cartDeleteRequest, new RequestListener<Cart>() {
+            @Override
+            public void onRequestFailure(SpiceException spiceException) {
+                System.out.println(spiceException);
+            }
+
+            @Override
+            public void onRequestSuccess(Cart cart) {
+                AppMsg.makeText(getActivity(), "Votre produit à bien été retiré du panier", AppMsg.STYLE_CONFIRM).show();
+            }
+        });
     }
 
     @Override
@@ -106,6 +160,60 @@ public class CartListFragment extends BaseListFragment {
         ButterKnife.reset(this);
     }
 
+    public void editProductToCartById(CartProductList cartProductList) {
+        int id_product_attribut = cartProductList.getIdProductAttribute();
+        int id_product = cartProductList.getIdProduct();
+        final int id_cart = cartProductList.getIdCart();
+        int id_address_delivery = cartProductList.getId_address_delivery();
+        CartProduct cartProduct = new CartProduct();
+        cartProduct.setIdAddressDelivery(id_address_delivery);
+        cartProduct.setIdProduct(id_product);
+        cartProduct.setIdProductAttribute(id_product_attribut);
+        cartProduct.setQuantity(1);
+        CartEditProductRequest cartEditProductRequest = new CartEditProductRequest(id_cart, cartProduct, "down", null);
+        getSpiceManager().execute(cartEditProductRequest, new RequestListener<CartProduct>() {
+            @Override
+            public void onRequestFailure(SpiceException spiceException) {
+
+            }
+
+            @Override
+            public void onRequestSuccess(CartProduct cart) {
+                getProductCartById(id_cart);
+            }
+        });
+    }
+
+    @Override
+    public void buttonClicked(View v, int position) {
+        CustomListAdapter customListAdapter = (CustomListAdapter) getListAdapter();
+        CartProductList cartProductList = (CartProductList) customListAdapter.getItem(position);
+        switch (v.getId()) {
+            case R.id.increment:
+                if (customListAdapter != null)
+                    addProductToCartById(cartProductList, "up");
+                break;
+
+            case R.id.decrement:
+                if (customListAdapter != null)
+                    editProductToCartById(cartProductList);
+                break;
+
+            case R.id.delete_cart:
+                if (customListAdapter != null) {
+                    int id_product_attribut = cartProductList.getIdProductAttribute();
+                    int id_product = cartProductList.getIdProduct();
+                    int id_cart = cartProductList.getIdCart();
+                    int id_address_delivery = cartProductList.getId_address_delivery();
+                    deleteProductCartById(id_cart, id_product, id_product_attribut, id_address_delivery);
+                }
+
+                break;
+        }
+
+    }
+
+
     public class CartGetRequestListner implements RequestListener<CartModel> {
 
         @Override
@@ -116,10 +224,14 @@ public class CartListFragment extends BaseListFragment {
         @Override
         public void onRequestSuccess(CartModel cartProduct) {
             try {
-              CustomListAdapter customListAdapter = new CustomListAdapter(getActivity(), cartProduct.getProductList());
-              setListAdapter(customListAdapter);
-            }catch (NullPointerException e){
-                System.out.printf(e.getMessage());
+                customListAdapter.setCustomItems(cartProduct.getProductList());
+                setListAdapter(customListAdapter);
+                customListAdapter.setOnClickListner(CartListFragment.this);
+                customListAdapter.setCustomItems(cartProduct.getProductList());
+                customListAdapter.notifyDataSetChanged();
+
+            } catch (NullPointerException e) {
+                System.out.println(e.fillInStackTrace());
             }
 
         }

@@ -1,75 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingBottom="10dp"
+    android:paddingLeft="10dp"
+    android:paddingTop="10dp">
 
     <ImageView
         android:id="@+id/product_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="18dp"
-        android:src="@drawable/abc_btn_switch_to_on_mtrl_00001" />
+        android:src="@drawable/ic_launcher" />
 
     <TextView
         android:id="@+id/libelle_produit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/product_image"
-        android:layout_marginLeft="16dp"
-        android:layout_toRightOf="@+id/product_image"
-        android:text="TextView" />
 
-    <TextView
-        android:id="@+id/description_short"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/libelle_produit"
-        android:layout_below="@+id/libelle_produit"
-        android:text="TextView" />
+        android:text="TextView"
+        style="@style/Base.Theme.AppCompat.Light"
+        android:layout_marginLeft="37dp"
+        android:layout_marginStart="37dp"
+        android:layout_alignTop="@+id/product_image"
+        android:layout_toRightOf="@+id/product_image"
+        android:layout_toEndOf="@+id/product_image" />
 
     <TextView
         android:id="@+id/prix_ttc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/description_short"
-        android:layout_below="@+id/description_short"
-        android:text="TextView" />
+        android:text="TextView"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:id="@+id/stock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/prix_ttc"
-        android:layout_below="@+id/prix_ttc"
-        android:text="TextView" />
+        android:text="TextView"
+        android:layout_below="@+id/libelle_produit"
+        android:layout_alignLeft="@+id/libelle_produit"
+        android:layout_alignStart="@+id/libelle_produit"
+        android:layout_marginTop="22dp" />
 
-    <Button
-        android:id="@+id/btn_qte"
-        style="@style/btn_product"
-        android:layout_width="80dp"
-        android:layout_height="30dp"
+
+    <EditText
+        android:id="@+id/qty_edit_text"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/border"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="number"
+        android:layout_below="@+id/product_image"
         android:layout_alignLeft="@+id/stock"
-        android:layout_below="@+id/stock"
-        android:layout_marginTop="10dp"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:text="Quantité"
-        android:textSize="10sp" />
+        android:layout_alignStart="@+id/stock" />
+
+    <ImageView
+        android:id="@+id/decrement"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/decrement"
+        android:layout_alignBottom="@+id/qty_edit_text"
+        android:layout_toRightOf="@+id/qty_edit_text"
+        android:layout_toEndOf="@+id/qty_edit_text"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="30dp" />
+
+    <ImageView
+        android:id="@+id/increment"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/increment"
+        android:layout_marginLeft="22dp"
+        android:layout_marginStart="22dp"
+        android:layout_alignTop="@+id/decrement"
+        android:layout_toRightOf="@+id/decrement"
+        android:layout_toEndOf="@+id/decrement" />
 
     <Button
-        android:id="@+id/delete_product"
-        style="@style/btn_product"
         android:layout_width="80dp"
-        android:layout_height="30dp"
-        android:layout_alignBaseline="@+id/btn_qte"
-        android:layout_alignBottom="@+id/btn_qte"
-        android:layout_marginLeft="22dp"
-        android:layout_toRightOf="@+id/btn_qte"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:text="Supprimer"
-        android:textSize="10sp" />
+        android:layout_height="80dp"
+        android:text="supp"
+        android:id="@+id/delete_cart"
+        android:layout_below="@+id/stock"
+        android:layout_alignRight="@+id/prix_ttc"
+        android:layout_alignEnd="@+id/prix_ttc" />
+
 
 </RelativeLayout>

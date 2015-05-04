@@ -1,4 +1,4 @@
-package dw.fdb.com.fdbapp.model;
+package dw.fdb.com.fdbapp.model.order;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +16,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dw.fdb.com.fdbapp.R;
+import dw.fdb.com.fdbapp.adapter.CustomListAdapter;
+import dw.fdb.com.fdbapp.model.Adress;
+import dw.fdb.com.fdbapp.model.Commande;
+import dw.fdb.com.fdbapp.model.Item;
 
 public class OrderHistory implements Item {
 
@@ -180,9 +184,6 @@ public class OrderHistory implements Item {
         this.payment = payment;
     }
 
-    /**
-     * @param commande The commande
-     */
 
     public int getIdOrder() {
         return idOrder;
@@ -224,7 +225,7 @@ public class OrderHistory implements Item {
     }
 
     @Override
-    public View getView(LayoutInflater inflator, View convertView, ViewGroup parent, int position) {
+    public View getView(LayoutInflater inflator, View convertView, ViewGroup parent, int position, CustomListAdapter.AdapterOnClickListner adapterOnClickListner) {
         ViewHolder holder;
         if (convertView == null) {
             holder = new ViewHolder();

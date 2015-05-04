@@ -11,6 +11,7 @@ import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import dw.fdb.com.fdbapp.R;
+import dw.fdb.com.fdbapp.adapter.CustomListAdapter;
 import dw.fdb.com.fdbapp.model.Category;
 import dw.fdb.com.fdbapp.model.Item;
 
@@ -77,7 +78,7 @@ public class CategoryRelativeView extends RelativeLayout implements Item {
 
 
 	@Override
-	public View getView(LayoutInflater inflator, View convertView, ViewGroup parent, int position) {
+	public View getView(LayoutInflater inflator, View convertView, ViewGroup parent, int position, CustomListAdapter.AdapterOnClickListner adapterOnClickListner) {
 
 		return this;
 	}

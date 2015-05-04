@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import dw.fdb.com.fdbapp.adapter.CustomListAdapter;
 import dw.fdb.com.fdbapp.model.Item;
 
 public class BaseRelativeView extends RelativeLayout implements Item {
@@ -31,7 +32,7 @@ public class BaseRelativeView extends RelativeLayout implements Item {
     }
 
     @Override
-    public View getView(LayoutInflater inflator, View convertView, ViewGroup parent, int position) {
+    public View getView(LayoutInflater inflator, View convertView, ViewGroup parent, int position, CustomListAdapter.AdapterOnClickListner adapterOnClickListner) {
         return null;
     }
 

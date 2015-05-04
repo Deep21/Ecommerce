@@ -14,11 +14,20 @@ public class CustomListAdapter extends BaseAdapter {
     List<? extends Item> items;
     LayoutInflater inflator;
     Context context;
+    AdapterOnClickListner adapterOnClickListner;
+
     public CustomListAdapter(Context context, List<? extends Item> items) {
         this.items = items;
         this.context = context;
 
 
+    }
+    public interface AdapterOnClickListner{
+        public void buttonClicked(View v, int i);
+    }
+
+    public void setOnClickListner(AdapterOnClickListner buttonListner){
+        this.adapterOnClickListner = buttonListner;
     }
 
     public List<? extends Item> getCustomItems() {
@@ -36,7 +45,7 @@ public class CustomListAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return items.size();
+        return (items == null) ? 0 : items.size();
     }
 
     @Override
@@ -53,9 +62,9 @@ public class CustomListAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             inflator = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            return items.get(position).getView(inflator, convertView, parent, 0);
+            return items.get(position).getView(inflator, convertView, parent, position, adapterOnClickListner);
         }
-        return items.get(position).getView(inflator, convertView, parent, 0);
+        return items.get(position).getView(inflator, convertView, parent, position, adapterOnClickListner);
     }
 
     public enum RowType {

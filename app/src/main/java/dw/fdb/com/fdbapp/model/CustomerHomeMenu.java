@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import dw.fdb.com.fdbapp.R;
+import dw.fdb.com.fdbapp.adapter.CustomListAdapter;
 
 
 public class CustomerHomeMenu implements Item {
@@ -35,7 +36,7 @@ public class CustomerHomeMenu implements Item {
 		this.title_description = title_description;
 	}
 	@Override
-	public View getView(LayoutInflater inflator, View convertView, ViewGroup parent, int position) {
+	public View getView(LayoutInflater inflator, View convertView, ViewGroup parent, int position, CustomListAdapter.AdapterOnClickListner adapterOnClickListner) {
 		ViewHolder holder;
 		if (convertView == null) {
 			holder = new ViewHolder();

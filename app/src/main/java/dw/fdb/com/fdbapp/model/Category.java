@@ -11,6 +11,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 
 import dw.fdb.com.fdbapp.R;
+import dw.fdb.com.fdbapp.adapter.CustomListAdapter;
 
 
 public class Category implements Item {
@@ -67,7 +68,7 @@ public class Category implements Item {
     }
 
     @Override
-    public View getView(LayoutInflater inflator, View convertView, ViewGroup parent, int position) {
+    public View getView(LayoutInflater inflator, View convertView, ViewGroup parent, int position, CustomListAdapter.AdapterOnClickListner adapterOnClickListner) {
         if (convertView == null) {
             convertView = inflator.inflate(R.layout.category_list_children, parent, false);
             TextView textView = (TextView) convertView.findViewById(R.id.libelle_category);

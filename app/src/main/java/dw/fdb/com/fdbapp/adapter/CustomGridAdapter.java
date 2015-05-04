@@ -13,6 +13,16 @@ import dw.fdb.com.fdbapp.model.Item;
 public class CustomGridAdapter extends BaseAdapter {
     List<? extends Item> items;
     LayoutInflater inflator;
+    AdapterOnClickListner adapterOnClickListner;
+
+    public interface AdapterOnClickListner{
+        public void buttonClicked(View v, int i);
+    }
+
+    public void setOnClickListner(AdapterOnClickListner buttonListner){
+        this.adapterOnClickListner = buttonListner;
+    }
+
 
     public CustomGridAdapter(Context context, List<? extends Item> items) {
         this.items = items;
@@ -41,7 +51,7 @@ public class CustomGridAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        return items.get(position).getView(inflator, convertView, parent, 0);
+        return items.get(position).getView(inflator, convertView, parent, position, null);
     }
 
 

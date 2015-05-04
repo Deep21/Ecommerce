@@ -16,7 +16,7 @@ import butterknife.InjectView;
 import dw.fdb.com.fdbapp.R;
 import dw.fdb.com.fdbapp.fragments.BaseFragment;
 import dw.fdb.com.fdbapp.listner.OauthListner;
-import dw.fdb.com.fdbapp.model.OrderHistory;
+import dw.fdb.com.fdbapp.model.order.OrderHistory;
 import dw.fdb.com.fdbapp.request.OrderGetRequest;
 import dw.fdb.com.fdbapp.views.OrderDetailRelativeView;
 
