@@ -1,4 +1,8 @@
-package dw.fdb.com.fdbapp.model;
+package dw.fdb.com.fdbapp.model.address;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -7,8 +11,11 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import dw.fdb.com.fdbapp.adapter.CustomListAdapter;
+import dw.fdb.com.fdbapp.model.Item;
 
-public class AddressDelivery {
+
+public class AddressDelivery implements Item {
 
     @Expose
     private String company;
@@ -211,4 +218,18 @@ public class AddressDelivery {
         return new EqualsBuilder().append(company, rhs.company).append(idAddress, rhs.idAddress).append(alias, rhs.alias).append(lastname, rhs.lastname).append(firstname, rhs.firstname).append(address1, rhs.address1).append(address2, rhs.address2).append(postcode, rhs.postcode).append(city, rhs.city).append(phone, rhs.phone).append(phoneMobile, rhs.phoneMobile).isEquals();
     }
 
+    @Override
+    public View getView(LayoutInflater inflator, View convertView, ViewGroup parent, int position, CustomListAdapter.AdapterOnClickListner adapterOnClickListner) {
+        return null;
+    }
+
+    @Override
+    public int getId(int position) {
+        return 0;
+    }
+
+    @Override
+    public int getViewType() {
+        return 0;
+    }
 }

@@ -14,7 +14,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 import dw.fdb.com.fdbapp.R;
 import dw.fdb.com.fdbapp.adapter.CustomListAdapter;
-import dw.fdb.com.fdbapp.fragments.AddressAddFragment;
+import dw.fdb.com.fdbapp.fragments.address.AddressAddFragment;
 import dw.fdb.com.fdbapp.fragments.BaseListFragment;
 import dw.fdb.com.fdbapp.fragments.FragmentListner;
 import dw.fdb.com.fdbapp.listner.BaseRequestLisner;

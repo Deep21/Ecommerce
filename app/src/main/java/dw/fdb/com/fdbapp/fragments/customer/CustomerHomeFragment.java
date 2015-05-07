@@ -1,4 +1,4 @@
-package dw.fdb.com.fdbapp.fragments;
+package dw.fdb.com.fdbapp.fragments.customer;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -17,6 +17,9 @@ import butterknife.ButterKnife;
 import dw.fdb.com.fdbapp.CustomerHomeMenu;
 import dw.fdb.com.fdbapp.R;
 import dw.fdb.com.fdbapp.adapter.CustomListAdapter;
+import dw.fdb.com.fdbapp.fragments.BaseListFragment;
+import dw.fdb.com.fdbapp.fragments.FragmentListner;
+import dw.fdb.com.fdbapp.fragments.address.AddressFragment;
 import dw.fdb.com.fdbapp.fragments.order.OrderListFragment;
 import dw.fdb.com.fdbapp.listner.OauthListner;
 import dw.fdb.com.fdbapp.model.Customer;

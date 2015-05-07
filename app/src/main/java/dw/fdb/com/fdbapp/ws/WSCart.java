@@ -17,7 +17,8 @@ public interface WSCart {
 
     @GET("/cart/customer/{id_customer}/get")
     public Cart getLastNoneOrderedCart(
-            @Path("id_customer") int id_customer);
+            @Path("id_customer") int id_customer,
+            @Header("Authorization") String token);
 
     @GET("/cart/{id_cart}/product/get")
     public CartModel getProductCartById(
@@ -36,9 +37,9 @@ public interface WSCart {
     public Cart createCart();
 
 
-    @POST("/cart/{id_cart}/product/add")
+
+    @POST("/cart/product/add")
     public CartProduct addProductToCartById(
-            @Path("id_cart") int id_cart,
             @Header("Authorization") String token,
             @Body CartProduct cartProduct,
             @Query("cart") String cart);

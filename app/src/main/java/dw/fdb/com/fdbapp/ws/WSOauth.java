@@ -8,10 +8,10 @@ import retrofit.http.Query;
 
 public interface WSOauth {
 
-    @POST("/auth/access-token")
+    @POST("/token/access-token")
     public Token getAccesToken(@Body Token token, @Query("refresh") int refresh);
 
-    @POST("/auth/refresh-token")
+    @POST("/token/refresh-token")
     public Token refreshToken(@Body Token token);
 
 

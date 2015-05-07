@@ -25,7 +25,7 @@ public class CartAddProductPostRequest extends BaseRequest<CartProduct, WSCart>{
 
 	@Override
 	public CartProduct loadDataFromNetwork() throws Exception {
-		return getService().addProductToCartById(id_cart, token, cart, param);
+		return getService().addProductToCartById(token, cart, param);
 	}
 
 	public String createCacheKey() {

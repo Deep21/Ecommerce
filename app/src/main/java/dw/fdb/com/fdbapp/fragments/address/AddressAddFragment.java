@@ -1,4 +1,4 @@
-package dw.fdb.com.fdbapp.fragments;
+package dw.fdb.com.fdbapp.fragments.address;
 
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -13,6 +13,7 @@ import com.octo.android.robospice.request.listener.RequestListener;
 
 import butterknife.ButterKnife;
 import dw.fdb.com.fdbapp.R;
+import dw.fdb.com.fdbapp.fragments.BaseFragment;
 import dw.fdb.com.fdbapp.model.Token;
 import dw.fdb.com.fdbapp.request.OauthGetAccesTokenRequest;
 

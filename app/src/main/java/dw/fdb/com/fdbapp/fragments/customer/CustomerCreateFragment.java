@@ -1,4 +1,4 @@
-package dw.fdb.com.fdbapp.fragments;
+package dw.fdb.com.fdbapp.fragments.customer;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -26,6 +26,8 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import dw.fdb.com.fdbapp.R;
+import dw.fdb.com.fdbapp.fragments.BaseFragment;
+import dw.fdb.com.fdbapp.fragments.FragmentListner;
 import dw.fdb.com.fdbapp.model.Customer;
 import dw.fdb.com.fdbapp.model.CustomerException;
 import dw.fdb.com.fdbapp.request.CustomerCreateRequest;

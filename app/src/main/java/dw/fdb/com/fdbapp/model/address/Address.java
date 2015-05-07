@@ -1,4 +1,4 @@
-package dw.fdb.com.fdbapp.model;
+package dw.fdb.com.fdbapp.model.address;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Adress {
+public class Address {
 
     @SerializedName("address_delivery")
     @Expose
@@ -63,10 +63,10 @@ public class Adress {
         if (other == this) {
             return true;
         }
-        if ((other instanceof Adress) == false) {
+        if ((other instanceof Address) == false) {
             return false;
         }
-        Adress rhs = ((Adress) other);
+        Address rhs = ((Address) other);
         return new EqualsBuilder().append(addressDelivery, rhs.addressDelivery).append(addressInvoice, rhs.addressInvoice).isEquals();
     }
 

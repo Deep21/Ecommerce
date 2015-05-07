@@ -1,4 +1,4 @@
-package dw.fdb.com.fdbapp.fragments;
+package dw.fdb.com.fdbapp.fragments.customer;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +9,7 @@ import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import dw.fdb.com.fdbapp.R;
+import dw.fdb.com.fdbapp.fragments.BaseFragment;
 import dw.fdb.com.fdbapp.model.Token;
 
 public class CustomerDetailFragment extends BaseFragment {

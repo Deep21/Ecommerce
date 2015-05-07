@@ -1,25 +1,28 @@
-package dw.fdb.com.fdbapp.fragments;
+package dw.fdb.com.fdbapp.fragments.address;
 
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 
 import butterknife.ButterKnife;
 import dw.fdb.com.fdbapp.R;
+import dw.fdb.com.fdbapp.adapter.CustomListAdapter;
+import dw.fdb.com.fdbapp.fragments.BaseListFragment;
 import dw.fdb.com.fdbapp.model.Token;
-import dw.fdb.com.fdbapp.request.OauthGetAccesTokenRequest;
+import dw.fdb.com.fdbapp.model.address.AddressInvoice;
+import dw.fdb.com.fdbapp.request.AddressGetRequest;
 
 public class AddressFragment extends BaseListFragment {
 
     public static final String TAG = "AddressFragment";
     public static final int TAG_ID = 1;
+    CustomListAdapter customListAdapter;
 
     public static AddressFragment getInstance() {
         AddressFragment connexionFragment = new AddressFragment();
@@ -29,6 +32,8 @@ public class AddressFragment extends BaseListFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.list_fragment, container, false);
+        RelativeLayout relativeLayout = (RelativeLayout)view.findViewById(R.id.mLlayout1);
+        relativeLayout.setVisibility(View.GONE);
         ButterKnife.inject(this, view);
         return view;
     }
@@ -37,6 +42,19 @@ public class AddressFragment extends BaseListFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
     }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        customListAdapter = new CustomListAdapter(getActivity(), null);
+        perform_request();
+//        customListAdapter.setCustomItems(cartProduct.getProductList());
+//        setListAdapter(customListAdapter);
+//        customListAdapter.setOnClickListner(CartListFragment.this);
+//        customListAdapter.setCustomItems(cartProduct.getProductList());
+//        customListAdapter.notifyDataSetChanged();
+    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,20 +70,15 @@ public class AddressFragment extends BaseListFragment {
         ButterKnife.reset(this);
     }
 
-    private void perform_request(Token token) {
-        OauthGetAccesTokenRequest accesTokenRequest = new OauthGetAccesTokenRequest(token);
-        getSpiceManager().execute(accesTokenRequest, new GetAccesTokenRequest());
+    private void perform_request() {
+        AddressGetRequest addressGetRequest = new AddressGetRequest(1);
+        getSpiceManager().execute(addressGetRequest, new GetAddressRequest());
     }
 
     private void storeInSharedPref(Token token) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        Editor edit = prefs.edit();
-        edit.putString(Token.OAUTH_ACCES_TOKEN, token.getAccessToken());
-        edit.putString(Token.OAUTH_REFRESH_TOKEN, token.getRefreshToken());
-        edit.commit();
     }
 
-    class GetAccesTokenRequest implements RequestListener<Token> {
+    class GetAddressRequest implements RequestListener<AddressInvoice.AddressList> {
 
         @Override
         public void onRequestFailure(SpiceException e) {
@@ -73,11 +86,9 @@ public class AddressFragment extends BaseListFragment {
         }
 
         @Override
-        public void onRequestSuccess(Token token) {
-            if (token != null) {
-                storeInSharedPref(token);
-            }
-
+        public void onRequestSuccess(AddressInvoice.AddressList address) {
+            customListAdapter.setCustomItems(address);
+            setListAdapter(customListAdapter);
         }
     }
 

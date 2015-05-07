@@ -16,7 +16,7 @@ import de.greenrobot.event.EventBus;
 import dw.fdb.com.fdbapp.R;
 import dw.fdb.com.fdbapp.fragments.CategoryListFragment;
 import dw.fdb.com.fdbapp.fragments.ConnexionFragment;
-import dw.fdb.com.fdbapp.fragments.CustomerHomeFragment;
+import dw.fdb.com.fdbapp.fragments.customer.CustomerHomeFragment;
 import dw.fdb.com.fdbapp.fragments.FragmentListner;
 import dw.fdb.com.fdbapp.fragments.cart.CartListFragment;
 import dw.fdb.com.fdbapp.fragments.order.OrderDetailScrollFragment;
@@ -70,7 +70,7 @@ public class MainActivity extends BaseAbstractActivity implements CategoryListFr
         //addOrderListFragment();
         //addHomeCustomerFragment();
 
-        // addConnexionFragment();
+         //addConnexionFragment();
 
         addCategoryFragment();
         //addProductListFragment();

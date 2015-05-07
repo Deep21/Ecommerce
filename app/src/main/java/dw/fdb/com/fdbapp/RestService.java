@@ -42,6 +42,7 @@ public class RestService extends RetrofitGsonSpiceService {
 
     @Override
     protected Builder createRestAdapterBuilder() {
+
         return super.createRestAdapterBuilder().setConverter(new GsonConverter(new GsonBuilder()
                 .registerTypeAdapter(TypeAdapter.class, new TypeAdapter<Integer>() {
 

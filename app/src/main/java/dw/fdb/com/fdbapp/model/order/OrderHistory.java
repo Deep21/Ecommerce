@@ -17,7 +17,7 @@ import java.util.List;
 
 import dw.fdb.com.fdbapp.R;
 import dw.fdb.com.fdbapp.adapter.CustomListAdapter;
-import dw.fdb.com.fdbapp.model.Adress;
+import dw.fdb.com.fdbapp.model.address.Address;
 import dw.fdb.com.fdbapp.model.Commande;
 import dw.fdb.com.fdbapp.model.Item;
 
@@ -49,7 +49,7 @@ public class OrderHistory implements Item {
     @Expose
     private List<OrderState> orderState = new ArrayList<OrderState>();
     @Expose
-    private Adress adress;
+    private Address adress;
     @Expose
     private List<Commande> commande = new ArrayList<Commande>();
 
@@ -154,14 +154,14 @@ public class OrderHistory implements Item {
     /**
      * @return The adress
      */
-    public Adress getAdress() {
+    public Address getAdress() {
         return adress;
     }
 
     /**
      * @param adress The adress
      */
-    public void setAdress(Adress adress) {
+    public void setAdress(Address adress) {
         this.adress = adress;
     }
 

@@ -4,6 +4,10 @@ package dw.fdb.com.fdbapp.activitie;
 import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.net.CookieHandler;
+import java.net.CookieManager;
+import java.net.CookiePolicy;
+
 import dw.fdb.com.fdbapp.db.model.DaoMaster;
 import dw.fdb.com.fdbapp.db.model.DaoSession;
 
@@ -27,6 +31,13 @@ public class MyApplication extends Application {
 
     public MyApplication getApplication() {
         return application;
+    }
+
+    public static CookieManager getCookieManager(){
+        CookieManager cookiemanager = new CookieManager();
+        cookiemanager.setCookiePolicy(CookiePolicy.ACCEPT_NONE);
+        CookieHandler.setDefault(cookiemanager);
+        return cookiemanager;
     }
 
     //create a DB

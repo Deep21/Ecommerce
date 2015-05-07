@@ -3,9 +3,8 @@ package dw.fdb.com.fdbapp.fragments.cart;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.app.LoaderManager;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +19,7 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 import dw.fdb.com.fdbapp.R;
 import dw.fdb.com.fdbapp.activitie.MyApplication;
 import dw.fdb.com.fdbapp.adapter.CustomListAdapter;
@@ -27,6 +27,7 @@ import dw.fdb.com.fdbapp.db.model.DBCart;
 import dw.fdb.com.fdbapp.db.model.DaoSession;
 import dw.fdb.com.fdbapp.fragments.BaseListFragment;
 import dw.fdb.com.fdbapp.fragments.FragmentListner;
+import dw.fdb.com.fdbapp.fragments.address.AddressFragment;
 import dw.fdb.com.fdbapp.listner.BaseRequestLisner;
 import dw.fdb.com.fdbapp.model.AuthTokenException;
 import dw.fdb.com.fdbapp.model.Token;
@@ -38,26 +39,46 @@ import dw.fdb.com.fdbapp.model.product.Product;
 import dw.fdb.com.fdbapp.request.CartAddProductPostRequest;
 import dw.fdb.com.fdbapp.request.CartDeleteRequest;
 import dw.fdb.com.fdbapp.request.CartEditProductRequest;
+import dw.fdb.com.fdbapp.request.CartGetLastNoneOrderedCartRequest;
 import dw.fdb.com.fdbapp.request.CartGetProductRequest;
 import dw.fdb.com.fdbapp.request.OauthGetAccesTokenRequest;
 
 public class CartListFragment extends BaseListFragment implements CustomListAdapter.AdapterOnClickListner {
 
     public static final String TAG = "CartListFragment";
-    long countItems;
+
     DaoSession daoSession;
     CustomListAdapter customListAdapter;
     @InjectView(R.id.qte)
     TextView nb_product;
 
     private FragmentListner fragmentSwitcherListner;
-    private LoaderManager.LoaderCallbacks<Cursor> mCallbacks;
+
 
     public static CartListFragment newInstance() {
         CartListFragment cartListFragment = new CartListFragment();
         return cartListFragment;
     }
 
+    @OnClick(R.id.set_order)
+    public void set_order(View view) {
+        AddressFragment addressFragment = AddressFragment.getInstance();
+        fragmentSwitcherListner.replaceFragment(addressFragment, AddressFragment.TAG);
+        if (customListAdapter.getCustomItems() != null) {
+
+            //Need Auth
+
+            //Need Auth
+
+
+            //Auth OK
+            //use merge customer cart id
+
+            //Auth OK
+
+        }
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -76,8 +97,6 @@ public class CartListFragment extends BaseListFragment implements CustomListAdap
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // productRequest();
-        // addProductToCartById();
         daoSession = MyApplication.getDaoSession();
         customListAdapter = new CustomListAdapter(getActivity(), null);
         List<DBCart> cart = daoSession.getDBCartDao().loadAll();
@@ -88,8 +107,14 @@ public class CartListFragment extends BaseListFragment implements CustomListAdap
             id_cart = dbCart.getId_cart();
         }
         getProductCartById(id_cart);
+
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+    }
 
     private void getProductCartById(int id_cart) {
         CartGetProductRequest cartGetProductRequest = new CartGetProductRequest(id_cart, null);
@@ -145,9 +170,11 @@ public class CartListFragment extends BaseListFragment implements CustomListAdap
         });
     }
 
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
     }
 
 
@@ -155,6 +182,24 @@ public class CartListFragment extends BaseListFragment implements CustomListAdap
     public void onDestroy() {
         super.onDestroy();
         ButterKnife.reset(this);
+    }
+
+    public void mergeCartWithCustomer() {
+        String token = "0c6173ebe084660d7899fb2f2ae5859d0710c67d";
+        int customer = 2;
+        CartGetLastNoneOrderedCartRequest cartGetLastNoneOrderedCartRequest = new CartGetLastNoneOrderedCartRequest(customer, token);
+        getSpiceManager().execute(cartGetLastNoneOrderedCartRequest, new RequestListener<Cart>() {
+            @Override
+            public void onRequestFailure(SpiceException spiceException) {
+
+            }
+
+            @Override
+            public void onRequestSuccess(Cart cart) {
+
+                System.out.println(cart.getId_cart());
+            }
+        });
     }
 
     public void editProductToCartById(CartProductList cartProductList) {
@@ -227,7 +272,6 @@ public class CartListFragment extends BaseListFragment implements CustomListAdap
                 customListAdapter.setOnClickListner(CartListFragment.this);
                 customListAdapter.setCustomItems(cartProduct.getProductList());
                 customListAdapter.notifyDataSetChanged();
-
             } catch (NullPointerException e) {
                 System.out.println(e.fillInStackTrace());
             }
