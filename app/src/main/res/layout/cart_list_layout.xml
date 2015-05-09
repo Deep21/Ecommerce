@@ -28,7 +28,7 @@
         android:layout_toEndOf="@+id/product_image" />
 
     <TextView
-        android:id="@+id/address1"
+        android:id="@+id/prix_ttc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
@@ -86,8 +86,8 @@
         android:text="supp"
         android:id="@+id/delete_cart"
         android:layout_below="@+id/stock"
-        android:layout_alignRight="@+id/address1"
-        android:layout_alignEnd="@+id/address1" />
+        android:layout_alignRight="@+id/prix_ttc"
+        android:layout_alignEnd="@+id/prix_ttc" />
 
 
 </RelativeLayout>

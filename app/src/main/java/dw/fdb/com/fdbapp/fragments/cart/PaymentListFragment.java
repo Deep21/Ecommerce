@@ -11,9 +11,12 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import dw.fdb.com.fdbapp.R;
+import dw.fdb.com.fdbapp.activitie.MainActivity;
 import dw.fdb.com.fdbapp.adapter.CustomListAdapter;
 import dw.fdb.com.fdbapp.fragments.BaseListFragment;
 import dw.fdb.com.fdbapp.model.Item;
+import dw.fdb.com.fdbapp.model.cart.CartModel;
+import dw.fdb.com.fdbapp.model.cart.CartProductList;
 import dw.fdb.com.fdbapp.model.cart.Payment;
 
 public class PaymentListFragment extends BaseListFragment {
@@ -37,13 +40,21 @@ public class PaymentListFragment extends BaseListFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        MainActivity mainActivity = (MainActivity)getActivity();
+        CartModel cartModel = (CartModel)mainActivity.getCartModel();
         List<Item> items = new ArrayList<Item>();
-
-        for(int i =0; i<10; i++){
-            Payment payment = new Payment();
-            items.add(payment);
+        if(cartModel !=null){
+            List<CartProductList> cartProductList = cartModel.getProductList();
+            for(CartProductList cart : cartProductList){
+                Payment payment = new Payment();
+                payment.setDescription(cart.getDescription());
+                payment.setLibelle_produit(cart.getProduit());
+                payment.setPrix_ttc(cart.getPriceTtc());
+                payment.setQty(cart.getQuantity());
+                payment.setUrl(cart.getUrlImage());
+                items.add(payment);
+            }
         }
-
         CustomListAdapter customListAdapter = new CustomListAdapter(getActivity(), items);
         setListAdapter(customListAdapter);
     }

@@ -19,7 +19,7 @@ import dw.fdb.com.fdbapp.R;
 import dw.fdb.com.fdbapp.adapter.CustomListAdapter;
 import dw.fdb.com.fdbapp.fragments.BaseListFragment;
 import dw.fdb.com.fdbapp.fragments.FragmentListner;
-import dw.fdb.com.fdbapp.fragments.address.AddressFragment;
+import dw.fdb.com.fdbapp.fragments.address.AddressListFragment;
 import dw.fdb.com.fdbapp.fragments.order.OrderListFragment;
 import dw.fdb.com.fdbapp.listner.OauthListner;
 import dw.fdb.com.fdbapp.model.Customer;
@@ -75,8 +75,8 @@ public class CustomerHomeFragment extends BaseListFragment {
                 fragmentSwitcherListner.replaceFragment(OrderListFragment.newInstance(), null);
                 break;
 
-            case AddressFragment.TAG_ID:
-                fragmentSwitcherListner.replaceFragment(AddressFragment.getInstance(), null);
+            case AddressListFragment.TAG_ID:
+                fragmentSwitcherListner.replaceFragment(AddressListFragment.getInstance(), null);
                 break;
 
             case CustomerDetailFragment.TAG_ID:

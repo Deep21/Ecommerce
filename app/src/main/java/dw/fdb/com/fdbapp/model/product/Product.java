@@ -1237,7 +1237,7 @@ public class Product implements Item {
             convertView = inflator.inflate(R.layout.product_list_layout, parent, false);
             holder.libelle_produit = (TextView) convertView.findViewById(R.id.libelle_produit);
             holder.description_short = (TextView) convertView.findViewById(R.id.description_short);
-            holder.prix_ttc = (TextView) convertView.findViewById(R.id.address1);
+            holder.prix_ttc = (TextView) convertView.findViewById(R.id.prix_ttc);
             holder.stock = (TextView) convertView.findViewById(R.id.stock);
             holder.product_image = (ImageView) convertView.findViewById(R.id.product_image);
             convertView.setTag(holder);

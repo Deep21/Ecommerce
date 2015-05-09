@@ -231,7 +231,7 @@ public class AddressInvoice implements Item {
             convertView = inflator.inflate(R.layout.address_invoice_layout_fragment, parent, false);
             holder.first_name = (TextView) convertView.findViewById(R.id.first_name);
             holder.last_name = (TextView) convertView.findViewById(R.id.last_name);
-            holder.adresse1 = (TextView) convertView.findViewById(R.id.address1);
+            holder.adresse1 = (TextView) convertView.findViewById(R.id.prix_ttc);
             holder.country = (TextView) convertView.findViewById(R.id.country);
             holder.mobile = (TextView) convertView.findViewById(R.id.mobile);
             convertView.setTag(holder);

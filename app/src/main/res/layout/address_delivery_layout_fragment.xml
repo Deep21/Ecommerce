@@ -59,7 +59,7 @@
             android:layout_below="@+id/first_name" />
 
         <TextView
-            android:id="@+id/address1"
+            android:id="@+id/prix_ttc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Small Text"
@@ -72,7 +72,7 @@
             android:layout_height="wrap_content"
             android:text="Small Text"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:layout_below="@+id/address1"/>
+            android:layout_below="@+id/prix_ttc"/>
 
         <TextView
             android:id="@+id/mobile"

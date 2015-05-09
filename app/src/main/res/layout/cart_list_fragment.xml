@@ -36,7 +36,7 @@
             android:text="2" />
 
         <TextView
-            android:id="@+id/address1"
+            android:id="@+id/prix_ttc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Total"
@@ -50,7 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Articles"
-            android:layout_above="@+id/address1"
+            android:layout_above="@+id/prix_ttc"
             android:layout_toRightOf="@+id/qte"
             android:layout_toEndOf="@+id/qte"
             android:layout_marginLeft="5dp"

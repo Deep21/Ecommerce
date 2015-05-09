@@ -27,9 +27,10 @@ import dw.fdb.com.fdbapp.fragments.product.ProductListFragment;
 import dw.fdb.com.fdbapp.listner.OauthListner;
 import dw.fdb.com.fdbapp.model.AuthTokenException;
 import dw.fdb.com.fdbapp.model.Token;
+import dw.fdb.com.fdbapp.model.cart.CartModel;
 
 
-public class MainActivity extends BaseAbstractActivity implements CategoryListFragment.Icommunicator, FragmentListner, OauthListner {
+public class MainActivity extends BaseAbstractActivity implements CategoryListFragment.Icommunicator, FragmentListner, OauthListner, CartListFragment.CartListListner {
 
     CartListFragment cartListFragment;
     ConnexionFragment connexionFragment;
@@ -41,6 +42,7 @@ public class MainActivity extends BaseAbstractActivity implements CategoryListFr
     CustomerHomeFragment customerHomeFragment;
     ProductListFragment productListFragment;
     PaymentListFragment paymentListFragment;
+    CartModel cartModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +75,8 @@ public class MainActivity extends BaseAbstractActivity implements CategoryListFr
         //addHomeCustomerFragment();
 
          //addConnexionFragment();
-        addPaymentFragment();
-        //addCategoryFragment();
+        //addPaymentFragment();
+        addCategoryFragment();
         //addProductListFragment();
         //addProductDetailFragment();
     }
@@ -243,6 +245,18 @@ public class MainActivity extends BaseAbstractActivity implements CategoryListFr
         fragmentManager.popBackStack();
 
     }
+
+
+    @Override
+    public void setCartModel(CartModel cartModel) {
+        this.cartModel = cartModel;
+    }
+
+    @Override
+    public CartModel getCartModel() {
+        return cartModel;
+    }
+
 
 
 }

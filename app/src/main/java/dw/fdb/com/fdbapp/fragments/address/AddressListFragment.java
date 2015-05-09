@@ -1,5 +1,6 @@
 package dw.fdb.com.fdbapp.fragments.address;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -13,9 +14,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import dw.fdb.com.fdbapp.R;
 import dw.fdb.com.fdbapp.adapter.CustomListAdapter;
 import dw.fdb.com.fdbapp.fragments.BaseListFragment;
+import dw.fdb.com.fdbapp.fragments.FragmentListner;
+import dw.fdb.com.fdbapp.fragments.cart.PaymentListFragment;
 import dw.fdb.com.fdbapp.model.Item;
 import dw.fdb.com.fdbapp.model.Token;
 import dw.fdb.com.fdbapp.model.address.AddressDelivery;
@@ -24,14 +28,15 @@ import dw.fdb.com.fdbapp.model.address.AddressModel;
 import dw.fdb.com.fdbapp.model.carrier.Carrier;
 import dw.fdb.com.fdbapp.request.AddressGetRequest;
 
-public class AddressFragment extends BaseListFragment {
+public class AddressListFragment extends BaseListFragment {
 
-    public static final String TAG = "AddressFragment";
+    public static final String TAG = "AddressListFragment";
     public static final int TAG_ID = 1;
     CustomListAdapter customListAdapter;
+    FragmentListner fragmentSwitcherListner;
 
-    public static AddressFragment getInstance() {
-        AddressFragment connexionFragment = new AddressFragment();
+    public static AddressListFragment getInstance() {
+        AddressListFragment connexionFragment = new AddressListFragment();
         return connexionFragment;
     }
 
@@ -71,6 +76,17 @@ public class AddressFragment extends BaseListFragment {
     }
 
     @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            fragmentSwitcherListner = (FragmentListner) activity;
+        } catch (ClassCastException castException) {
+
+        }
+
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.reset(this);
@@ -82,6 +98,14 @@ public class AddressFragment extends BaseListFragment {
     }
 
     private void storeInSharedPref(Token token) {
+    }
+
+
+    @OnClick(R.id.next)
+    public void next(View view) {
+        PaymentListFragment paymentListFragment = PaymentListFragment.newInstance();
+        fragmentSwitcherListner.replaceFragment(paymentListFragment, PaymentListFragment.TAG);
+
     }
 
     class GetAddressRequest implements RequestListener<AddressModel> {
@@ -97,7 +121,6 @@ public class AddressFragment extends BaseListFragment {
             List<Carrier> carrier = address.getCarrier();
             AddressInvoice addressInvoice = address.getAddressInvoice();
             List<Item> addressItem = new ArrayList<Item>();
-            System.out.println(carrier);
             addressItem.add(addressDelivery);
             addressItem.add(addressInvoice);
             for(Carrier c: carrier){

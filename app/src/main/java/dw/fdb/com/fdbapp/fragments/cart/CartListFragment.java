@@ -27,7 +27,7 @@ import dw.fdb.com.fdbapp.db.model.DBCart;
 import dw.fdb.com.fdbapp.db.model.DaoSession;
 import dw.fdb.com.fdbapp.fragments.BaseListFragment;
 import dw.fdb.com.fdbapp.fragments.FragmentListner;
-import dw.fdb.com.fdbapp.fragments.address.AddressFragment;
+import dw.fdb.com.fdbapp.fragments.address.AddressListFragment;
 import dw.fdb.com.fdbapp.listner.BaseRequestLisner;
 import dw.fdb.com.fdbapp.model.AuthTokenException;
 import dw.fdb.com.fdbapp.model.Token;
@@ -51,9 +51,8 @@ public class CartListFragment extends BaseListFragment implements CustomListAdap
     CustomListAdapter customListAdapter;
     @InjectView(R.id.qte)
     TextView nb_product;
-
+    CartListListner cartListListner;
     private FragmentListner fragmentSwitcherListner;
-
 
     public static CartListFragment newInstance() {
         CartListFragment cartListFragment = new CartListFragment();
@@ -62,8 +61,8 @@ public class CartListFragment extends BaseListFragment implements CustomListAdap
 
     @OnClick(R.id.set_order)
     public void set_order(View view) {
-        AddressFragment addressFragment = AddressFragment.getInstance();
-        fragmentSwitcherListner.replaceFragment(addressFragment, AddressFragment.TAG);
+        AddressListFragment addressFragment = AddressListFragment.getInstance();
+        fragmentSwitcherListner.replaceFragment(addressFragment, AddressListFragment.TAG);
         if (customListAdapter.getCustomItems() != null) {
 
             //Need Auth
@@ -87,11 +86,15 @@ public class CartListFragment extends BaseListFragment implements CustomListAdap
         return view;
     }
 
-
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        fragmentSwitcherListner = (FragmentListner) activity;
+        try {
+            fragmentSwitcherListner = (FragmentListner) activity;
+            cartListListner = (CartListListner) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString() + " must implement onButtonPressed");
+        }
     }
 
     @Override
@@ -106,7 +109,7 @@ public class CartListFragment extends BaseListFragment implements CustomListAdap
             DBCart dbCart = c.next();
             id_cart = dbCart.getId_cart();
         }
-        getProductCartById(id_cart);
+        getProductCartById(87);
 
     }
 
@@ -170,13 +173,11 @@ public class CartListFragment extends BaseListFragment implements CustomListAdap
         });
     }
 
-
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
     }
-
 
     @Override
     public void onDestroy() {
@@ -255,6 +256,10 @@ public class CartListFragment extends BaseListFragment implements CustomListAdap
 
     }
 
+    public interface CartListListner {
+        public void setCartModel(CartModel cartModel);
+        public CartModel getCartModel();
+    }
 
     public class CartGetRequestListner implements RequestListener<CartModel> {
 
@@ -266,6 +271,7 @@ public class CartListFragment extends BaseListFragment implements CustomListAdap
         @Override
         public void onRequestSuccess(CartModel cartProduct) {
             try {
+                cartListListner.setCartModel(cartProduct);
                 nb_product.setText(String.valueOf(cartProduct.getNb_product()));
                 customListAdapter.setCustomItems(cartProduct.getProductList());
                 setListAdapter(customListAdapter);

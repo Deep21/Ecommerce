@@ -26,7 +26,7 @@
         style="@style/Base.Theme.AppCompat.Light" />
 
     <TextView
-        android:id="@+id/address1"
+        android:id="@+id/prix_ttc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"

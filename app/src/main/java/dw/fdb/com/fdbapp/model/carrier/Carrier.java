@@ -673,7 +673,7 @@ public class Carrier implements Item{
             holder = new ViewHolder();
             convertView = inflator.inflate(R.layout.carrier_layout_fragment, parent, false);
             holder.carrier_name = (TextView) convertView.findViewById(R.id.carrier_name);
-            holder.prix_ttc = (TextView) convertView.findViewById(R.id.address1);
+            holder.prix_ttc = (TextView) convertView.findViewById(R.id.prix_ttc);
             holder.delay = (TextView) convertView.findViewById(R.id.last_name);
             convertView.setTag(holder);
         } else {

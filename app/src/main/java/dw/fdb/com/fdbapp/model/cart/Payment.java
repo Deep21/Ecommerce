@@ -16,6 +16,13 @@ import dw.fdb.com.fdbapp.model.Item;
  */
 public class Payment implements Item {
 
+    private String libelle_produit;
+    private String description;
+    private String url;
+    private int qty;
+    private double prix_ttc;
+
+
     @Override
     public View getView(LayoutInflater inflator, View convertView, ViewGroup parent, int position, CustomListAdapter.AdapterOnClickListner adapterOnClickListner) {
         ViewHolder holder;
@@ -26,7 +33,7 @@ public class Payment implements Item {
             holder.libelle_produit = (TextView) convertView.findViewById(R.id.libelle_produit);
             holder.qty_edit_text = (EditText) convertView.findViewById(R.id.qty_edit_text);
             holder.description_product = (TextView) convertView.findViewById(R.id.description_product);
-            holder.prix_ttc = (TextView) convertView.findViewById(R.id.address1);
+            holder.prix_ttc = (TextView) convertView.findViewById(R.id.prix_ttc);
             holder.product_image = (ImageView) convertView.findViewById(R.id.product_image);
             convertView.setTag(holder);
 
@@ -41,6 +48,47 @@ public class Payment implements Item {
 
         return convertView;
     }
+
+    public String getLibelle_produit() {
+        return libelle_produit;
+    }
+
+    public void setLibelle_produit(String libelle_produit) {
+        this.libelle_produit = libelle_produit;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public int getQty() {
+        return qty;
+    }
+
+    public void setQty(int qty) {
+        this.qty = qty;
+    }
+
+    public double getPrix_ttc() {
+        return prix_ttc;
+    }
+
+    public void setPrix_ttc(double prix_ttc) {
+        this.prix_ttc = prix_ttc;
+    }
+
     public static class ViewHolder {
         TextView libelle_produit;
         TextView description_product;
