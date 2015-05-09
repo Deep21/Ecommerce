@@ -6,9 +6,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.ButterKnife;
 import dw.fdb.com.fdbapp.R;
+import dw.fdb.com.fdbapp.adapter.CustomListAdapter;
 import dw.fdb.com.fdbapp.fragments.BaseListFragment;
+import dw.fdb.com.fdbapp.model.Item;
+import dw.fdb.com.fdbapp.model.cart.Payment;
 
 public class PaymentListFragment extends BaseListFragment {
 
@@ -31,6 +37,15 @@ public class PaymentListFragment extends BaseListFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        List<Item> items = new ArrayList<Item>();
+
+        for(int i =0; i<10; i++){
+            Payment payment = new Payment();
+            items.add(payment);
+        }
+
+        CustomListAdapter customListAdapter = new CustomListAdapter(getActivity(), items);
+        setListAdapter(customListAdapter);
     }
 
     @Override

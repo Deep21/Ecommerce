@@ -457,14 +457,14 @@ public class CartProductList implements Item {
     /**
      * @param manufacturerName The manufacturer_name
      */
-    public void setManufacturerName(String manufacturerName) {
+    public void setManufacturerName(Object manufacturerName) {
         this.manufacturerName = manufacturerName;
     }
 
     /**
      * @param manufacturerName The manufacturer_name
      */
-    public void setManufacturerName(Object manufacturerName) {
+    public void setManufacturerName(String manufacturerName) {
         this.manufacturerName = manufacturerName;
     }
 
@@ -1239,6 +1239,24 @@ public class CartProductList implements Item {
     }
 
     @Override
+    public int getId(int position) {
+        return 0;
+    }
+
+    @Override
+    public int getViewType() {
+        return 0;
+    }
+
+    public int getIdCart() {
+        return idCart;
+    }
+
+    public void setIdCart(int idCart) {
+        this.idCart = idCart;
+    }
+
+    @Override
     public View getView(LayoutInflater inflator, View convertView, ViewGroup parent, final int position, final CustomListAdapter.AdapterOnClickListner adapterOnClickListner) {
         ViewHolder holder;
         System.out.println(position);
@@ -1292,25 +1310,16 @@ public class CartProductList implements Item {
 
         return convertView;
     }
-
-    @Override
-    public int getId(int position) {
-        return 0;
+    public static class ViewHolder {
+        TextView libelle_produit;
+        TextView prix_ttc;
+        TextView stock;
+        Button delete_cart;
+        EditText qty_edit_text;
+        ImageView product_image;
+        ImageView increment;
+        ImageView decrement;
     }
-
-    @Override
-    public int getViewType() {
-        return 0;
-    }
-
-    public int getIdCart() {
-        return idCart;
-    }
-
-    public void setIdCart(int idCart) {
-        this.idCart = idCart;
-    }
-
     public int getId_address_delivery() {
         return id_address_delivery;
     }
@@ -1321,17 +1330,5 @@ public class CartProductList implements Item {
 
 
 
-    final public  static class ViewHolder {
-        TextView libelle_produit;
-        TextView prix_ttc;
-        TextView stock;
-        Button delete_cart;
-        EditText qty_edit_text;
-        ImageView product_image;
-        ImageView increment;
-        ImageView decrement;
-
-
-    }
 
 }
