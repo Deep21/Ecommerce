@@ -3,6 +3,7 @@ package dw.fdb.com.fdbapp.model.address;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -11,6 +12,9 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import java.util.ArrayList;
+
+import dw.fdb.com.fdbapp.R;
 import dw.fdb.com.fdbapp.adapter.CustomListAdapter;
 import dw.fdb.com.fdbapp.model.Item;
 
@@ -218,9 +222,31 @@ public class AddressDelivery implements Item {
         return new EqualsBuilder().append(company, rhs.company).append(idAddress, rhs.idAddress).append(alias, rhs.alias).append(lastname, rhs.lastname).append(firstname, rhs.firstname).append(address1, rhs.address1).append(address2, rhs.address2).append(postcode, rhs.postcode).append(city, rhs.city).append(phone, rhs.phone).append(phoneMobile, rhs.phoneMobile).isEquals();
     }
 
+
     @Override
     public View getView(LayoutInflater inflator, View convertView, ViewGroup parent, int position, CustomListAdapter.AdapterOnClickListner adapterOnClickListner) {
-        return null;
+
+        ViewHolder holder;
+
+        if (convertView == null) {
+            holder = new ViewHolder();
+            convertView = inflator.inflate(R.layout.address_delivery_layout_fragment, parent, false);
+            holder.first_name = (TextView) convertView.findViewById(R.id.first_name);
+            holder.last_name = (TextView) convertView.findViewById(R.id.last_name);
+            holder.adresse1 = (TextView) convertView.findViewById(R.id.address1);
+            holder.country = (TextView) convertView.findViewById(R.id.country);
+            holder.mobile = (TextView) convertView.findViewById(R.id.mobile);
+            convertView.setTag(holder);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
+        }
+        holder.first_name.setText(getFirstname());
+        holder.last_name.setText(getLastname());
+        holder.adresse1.setText(getAddress1());
+        holder.country.setText(getCity());
+        holder.mobile.setText(getPhoneMobile());
+
+        return convertView;
     }
 
     @Override
@@ -230,6 +256,19 @@ public class AddressDelivery implements Item {
 
     @Override
     public int getViewType() {
-        return 0;
+        return CustomListAdapter.AddressType.ADDRESS_DELEVERY_LAYOUT.ordinal();
+    }
+
+    @SuppressWarnings("serial")
+    public static class AddressList extends ArrayList<AddressInvoice> {
+    }
+
+    public static class ViewHolder {
+        TextView first_name;
+        TextView last_name;
+        TextView adresse1;
+        TextView country;
+        TextView mobile;
+
     }
 }

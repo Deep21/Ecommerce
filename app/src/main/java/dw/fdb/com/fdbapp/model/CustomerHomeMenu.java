@@ -41,7 +41,7 @@ public class CustomerHomeMenu implements Item {
 		if (convertView == null) {
 			holder = new ViewHolder();
 			convertView = inflator.inflate(R.layout.customer_home_layout, parent, false);
-			holder.title = (TextView) convertView.findViewById(R.id.title);
+			holder.title = (TextView) convertView.findViewById(R.id.title_invoice_address);
 			holder.title_description = (TextView) convertView.findViewById(R.id.title_desciption);
 			holder.img_icone = (ImageView) convertView.findViewById(R.id.img_icone);
 

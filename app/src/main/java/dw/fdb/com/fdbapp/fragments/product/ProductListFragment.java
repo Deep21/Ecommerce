@@ -57,7 +57,7 @@ public class ProductListFragment extends BaseListFragment {
 
     }
 
-    @OnClick(R.id.filter)
+    @OnClick(R.id.next)
     public void filter(View v) {
         FilterFragment filterFragment = FilterFragment.getInstance();
         fragmentSwitcherListner.replaceFragment(filterFragment, FilterFragment.TAG);

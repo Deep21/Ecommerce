@@ -228,10 +228,10 @@ public class AddressInvoice implements Item {
 
         if (convertView == null) {
             holder = new ViewHolder();
-            convertView = inflator.inflate(R.layout.address_layout_fragment, parent, false);
+            convertView = inflator.inflate(R.layout.address_invoice_layout_fragment, parent, false);
             holder.first_name = (TextView) convertView.findViewById(R.id.first_name);
             holder.last_name = (TextView) convertView.findViewById(R.id.last_name);
-            holder.adresse1 = (TextView) convertView.findViewById(R.id.adresse1);
+            holder.adresse1 = (TextView) convertView.findViewById(R.id.address1);
             holder.country = (TextView) convertView.findViewById(R.id.country);
             holder.mobile = (TextView) convertView.findViewById(R.id.mobile);
             convertView.setTag(holder);
@@ -254,7 +254,7 @@ public class AddressInvoice implements Item {
 
     @Override
     public int getViewType() {
-        return 0;
+        return CustomListAdapter.AddressType.ADDRESS_INVOICE_LAYOUT.ordinal();
     }
 
     @SuppressWarnings("serial")

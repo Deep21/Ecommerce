@@ -40,6 +40,11 @@ public class CustomListAdapter extends BaseAdapter {
 
     @Override
     public int getItemViewType(int position) {
+        return items.get(position).getViewType();
+    }
+
+    @Override
+    public int getViewTypeCount() {
         return RowType.values().length;
     }
 
@@ -69,6 +74,10 @@ public class CustomListAdapter extends BaseAdapter {
 
     public enum RowType {
         CATEGORY_MORE_PRODUCT_LAYOUT, SIMPLE_CATEGORY_LAYOUT
+    }
+
+    public enum AddressType {
+        ADDRESS_INVOICE_LAYOUT, ADDRESS_DELEVERY_LAYOUT
     }
 
 

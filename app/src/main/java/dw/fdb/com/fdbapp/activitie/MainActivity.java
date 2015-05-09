@@ -16,9 +16,10 @@ import de.greenrobot.event.EventBus;
 import dw.fdb.com.fdbapp.R;
 import dw.fdb.com.fdbapp.fragments.CategoryListFragment;
 import dw.fdb.com.fdbapp.fragments.ConnexionFragment;
-import dw.fdb.com.fdbapp.fragments.customer.CustomerHomeFragment;
 import dw.fdb.com.fdbapp.fragments.FragmentListner;
 import dw.fdb.com.fdbapp.fragments.cart.CartListFragment;
+import dw.fdb.com.fdbapp.fragments.cart.PaymentListFragment;
+import dw.fdb.com.fdbapp.fragments.customer.CustomerHomeFragment;
 import dw.fdb.com.fdbapp.fragments.order.OrderDetailScrollFragment;
 import dw.fdb.com.fdbapp.fragments.order.OrderListFragment;
 import dw.fdb.com.fdbapp.fragments.product.ProductDetailScrollFragment;
@@ -39,6 +40,7 @@ public class MainActivity extends BaseAbstractActivity implements CategoryListFr
     OrderListFragment listFragment;
     CustomerHomeFragment customerHomeFragment;
     ProductListFragment productListFragment;
+    PaymentListFragment paymentListFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,8 +73,8 @@ public class MainActivity extends BaseAbstractActivity implements CategoryListFr
         //addHomeCustomerFragment();
 
          //addConnexionFragment();
-
-        addCategoryFragment();
+        addPaymentFragment();
+        //addCategoryFragment();
         //addProductListFragment();
         //addProductDetailFragment();
     }
@@ -88,6 +90,14 @@ public class MainActivity extends BaseAbstractActivity implements CategoryListFr
         if (categoryListFragment == null) {
             categoryListFragment = CategoryListFragment.newInstance(2);
             getSupportFragmentManager().beginTransaction().add(R.id.frame, categoryListFragment, CategoryListFragment.TAG).commit();
+        }
+    }
+
+    private void addPaymentFragment() {
+        paymentListFragment = (PaymentListFragment) getSupportFragmentManager().findFragmentByTag(PaymentListFragment.TAG);
+        if (paymentListFragment == null) {
+            paymentListFragment = PaymentListFragment.newInstance();
+            getSupportFragmentManager().beginTransaction().add(R.id.frame, paymentListFragment, PaymentListFragment.TAG).commit();
         }
     }
 

@@ -1248,7 +1248,7 @@ public class CartProductList implements Item {
 
             holder.libelle_produit = (TextView) convertView.findViewById(R.id.libelle_produit);
             holder.qty_edit_text = (EditText) convertView.findViewById(R.id.qty_edit_text);
-            holder.prix_ttc = (TextView) convertView.findViewById(R.id.prix_ttc);
+            holder.prix_ttc = (TextView) convertView.findViewById(R.id.address1);
             holder.stock = (TextView) convertView.findViewById(R.id.stock);
             holder.product_image = (ImageView) convertView.findViewById(R.id.product_image);
             holder.increment = (ImageView) convertView.findViewById(R.id.increment);
