@@ -16,25 +16,12 @@
             android:id="@+id/title_delivery_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Adresse de facturation"
+            android:text="Adresse de livraison"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <Button
-            android:id="@+id/edit_delivery"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginEnd="25dp"
-            android:layout_marginRight="25dp"
-            android:text="editer" />
-
-
+            android:layout_alignParentStart="true"
+            android:textStyle="bold" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -81,6 +68,28 @@
             android:text="Small Text"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:layout_below="@+id/country" />
+
+        <Button
+            android:id="@+id/edit_address_dellivery"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="editer"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:id="@+id/remove_address_dellivery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Supprimer"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/edit_address_dellivery"
+            android:layout_toEndOf="@+id/edit_address_dellivery"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="20dp" />
 
     </RelativeLayout>
 

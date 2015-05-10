@@ -12,13 +12,13 @@
     <RelativeLayout
 
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="160dp"
         android:orientation="horizontal"
         android:background="@android:color/white"
         android:padding="3dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true" >
 
 
     <Button
@@ -29,6 +29,7 @@
         android:text="Paypal"
         android:textColor="@android:color/white"
         android:textSize="15sp"
+        android:layout_marginTop="10dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
@@ -39,22 +40,19 @@
             android:text="Total Prix TTC"
             android:id="@+id/textView5"
             android:layout_alignParentTop="true"
-            android:layout_alignLeft="@+id/set_order"
-            android:layout_alignStart="@+id/set_order"
-            android:layout_marginTop="27dp" />
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Total"
+            android:text="Montant total"
             android:id="@+id/total_lbl"
-            android:layout_marginRight="54dp"
-            android:layout_marginEnd="54dp"
 
-            android:layout_below="@+id/textView4"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_above="@+id/set_order"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -63,8 +61,9 @@
             android:text="Total transport TTC "
             android:id="@+id/textView4"
             android:layout_below="@+id/textView5"
-            android:layout_alignLeft="@+id/textView5"
-            android:layout_alignStart="@+id/textView5" />
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="5dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -72,9 +71,9 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="51 €"
             android:id="@+id/textView6"
-            android:layout_above="@+id/textView4"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignTop="@+id/textView5"
+            android:layout_alignRight="@+id/set_order"
+            android:layout_alignEnd="@+id/set_order" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -82,10 +81,21 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="51 €"
             android:id="@+id/textView7"
-            android:layout_above="@+id/total_lbl"
-            android:layout_toLeftOf="@+id/textView6"
-            android:layout_toStartOf="@+id/textView6"
-            android:layout_alignParentRight="true" />
+            android:layout_alignTop="@+id/textView4"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="EUR 48,30"
+            android:textColor="@android:color/holo_red_light"
+            android:id="@+id/textView8"
+            android:layout_above="@+id/set_order"
+            android:layout_alignRight="@+id/set_order"
+            android:layout_alignEnd="@+id/set_order" />
+
     </RelativeLayout>
 
 </RelativeLayout>

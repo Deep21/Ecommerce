@@ -7,6 +7,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import dw.fdb.com.fdbapp.R;
 import dw.fdb.com.fdbapp.adapter.CustomListAdapter;
 import dw.fdb.com.fdbapp.model.Item;
@@ -20,7 +22,7 @@ public class Payment implements Item {
     private String description;
     private String url;
     private int qty;
-    private double prix_ttc;
+    private int prix_ttc;
 
 
     @Override
@@ -32,7 +34,6 @@ public class Payment implements Item {
             convertView = inflator.inflate(R.layout.payment_layout_fragment, parent, false);
             holder.libelle_produit = (TextView) convertView.findViewById(R.id.libelle_produit);
             holder.qty_edit_text = (EditText) convertView.findViewById(R.id.qty_edit_text);
-            holder.description_product = (TextView) convertView.findViewById(R.id.description_product);
             holder.prix_ttc = (TextView) convertView.findViewById(R.id.prix_ttc);
             holder.product_image = (ImageView) convertView.findViewById(R.id.product_image);
             convertView.setTag(holder);
@@ -41,10 +42,10 @@ public class Payment implements Item {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.libelle_produit.setText("e");
-        holder.prix_ttc.setText(Integer.toString(55));
-        holder.qty_edit_text.setText(""+5);
-        //Picasso.with(parent.getContext()).load("");
+        holder.libelle_produit.setText(getLibelle_produit());
+        holder.prix_ttc.setText(Integer.toString(getPrix_ttc()));
+        holder.qty_edit_text.setText(Integer.toString(getQty()));
+      Picasso.with(parent.getContext()).load(getUrl()).into(holder.product_image);
 
         return convertView;
     }
@@ -81,11 +82,11 @@ public class Payment implements Item {
         this.qty = qty;
     }
 
-    public double getPrix_ttc() {
+    public int getPrix_ttc() {
         return prix_ttc;
     }
 
-    public void setPrix_ttc(double prix_ttc) {
+    public void setPrix_ttc(int prix_ttc) {
         this.prix_ttc = prix_ttc;
     }
 

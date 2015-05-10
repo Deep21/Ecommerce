@@ -14,7 +14,7 @@ public class CustomListAdapter extends BaseAdapter {
     List<? extends Item> items;
     LayoutInflater inflator;
     Context context;
-    AdapterOnClickListner adapterOnClickListner;
+    CustomListAdapter.AdapterOnClickListner adapterOnClickListner;
 
     public CustomListAdapter(Context context, List<? extends Item> items) {
         this.items = items;
@@ -26,7 +26,7 @@ public class CustomListAdapter extends BaseAdapter {
         public void buttonClicked(View v, int i);
     }
 
-    public void setOnClickListner(AdapterOnClickListner buttonListner){
+    public void setOnClickListner(CustomListAdapter.AdapterOnClickListner buttonListner){
         this.adapterOnClickListner = buttonListner;
     }
 

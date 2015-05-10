@@ -45,6 +45,7 @@ public class PaymentListFragment extends BaseListFragment {
         List<Item> items = new ArrayList<Item>();
         if(cartModel !=null){
             List<CartProductList> cartProductList = cartModel.getProductList();
+
             for(CartProductList cart : cartProductList){
                 Payment payment = new Payment();
                 payment.setDescription(cart.getDescription());

@@ -3,6 +3,7 @@ package dw.fdb.com.fdbapp.model.address;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.gson.annotations.Expose;
@@ -224,7 +225,7 @@ public class AddressDelivery implements Item {
 
 
     @Override
-    public View getView(LayoutInflater inflator, View convertView, ViewGroup parent, int position, CustomListAdapter.AdapterOnClickListner adapterOnClickListner) {
+    public View getView(LayoutInflater inflator, View convertView, ViewGroup parent, final int position, final CustomListAdapter.AdapterOnClickListner adapterOnClickListner) {
         ViewHolder holder;
         if (convertView == null) {
             holder = new ViewHolder();
@@ -234,6 +235,10 @@ public class AddressDelivery implements Item {
             holder.adresse1 = (TextView) convertView.findViewById(R.id.prix_ttc);
             holder.country = (TextView) convertView.findViewById(R.id.country);
             holder.mobile = (TextView) convertView.findViewById(R.id.mobile);
+            holder.edit_address = (Button) convertView.findViewById(R.id.edit_address_dellivery);
+            holder.remove_address = (Button) convertView.findViewById(R.id.remove_address_dellivery);
+            holder.edit_address.setTag(Integer.valueOf(position));
+            holder.remove_address.setTag(Integer.valueOf(position));
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -243,7 +248,20 @@ public class AddressDelivery implements Item {
         holder.adresse1.setText(getAddress1());
         holder.country.setText(getCity());
         holder.mobile.setText(getPhoneMobile());
+        holder.mobile.setText(getPhoneMobile());
+        holder.edit_address.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adapterOnClickListner.buttonClicked(v, position);
+            }
+        });
 
+        holder.remove_address.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adapterOnClickListner.buttonClicked(v, position);
+            }
+        });
         return convertView;
     }
 
@@ -267,6 +285,7 @@ public class AddressDelivery implements Item {
         TextView adresse1;
         TextView country;
         TextView mobile;
-
+        Button edit_address;
+        Button remove_address;
     }
 }

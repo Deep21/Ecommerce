@@ -21,14 +21,13 @@ import dw.fdb.com.fdbapp.fragments.BaseListFragment;
 import dw.fdb.com.fdbapp.fragments.FragmentListner;
 import dw.fdb.com.fdbapp.fragments.cart.PaymentListFragment;
 import dw.fdb.com.fdbapp.model.Item;
-import dw.fdb.com.fdbapp.model.Token;
 import dw.fdb.com.fdbapp.model.address.AddressDelivery;
 import dw.fdb.com.fdbapp.model.address.AddressInvoice;
 import dw.fdb.com.fdbapp.model.address.AddressModel;
 import dw.fdb.com.fdbapp.model.carrier.Carrier;
 import dw.fdb.com.fdbapp.request.AddressGetRequest;
 
-public class AddressListFragment extends BaseListFragment {
+public class AddressListFragment extends BaseListFragment implements CustomListAdapter.AdapterOnClickListner{
 
     public static final String TAG = "AddressListFragment";
     public static final int TAG_ID = 1;
@@ -97,14 +96,45 @@ public class AddressListFragment extends BaseListFragment {
         getSpiceManager().execute(addressGetRequest, new GetAddressRequest());
     }
 
-    private void storeInSharedPref(Token token) {
-    }
-
 
     @OnClick(R.id.next)
     public void next(View view) {
         PaymentListFragment paymentListFragment = PaymentListFragment.newInstance();
         fragmentSwitcherListner.replaceFragment(paymentListFragment, PaymentListFragment.TAG);
+
+    }
+
+    @Override
+    public void buttonClicked(View v, int i) {
+        switch (v.getId()){
+            case R.id.edit_address_dellivery:
+                System.out.println(v.getTag());
+                System.out.println(v.getId());
+                System.out.println(i);
+                System.out.println("livraison");
+                break;
+
+            case R.id.remove_address_dellivery:
+                System.out.println(v.getTag());
+                System.out.println(v.getId());
+                System.out.println(i);
+                System.out.println("livraison");
+                break;
+
+            case R.id.edit_address_invoice:
+                System.out.println(v.getTag());
+                System.out.println(v.getId());
+                System.out.println(i);
+                System.out.println("facturation");
+                break;
+
+            case R.id.remove_address_invoice:
+                System.out.println(v.getTag());
+                System.out.println(v.getId());
+                System.out.println(i);
+                System.out.println("facturation");
+                break;
+        }
 
     }
 
@@ -126,6 +156,7 @@ public class AddressListFragment extends BaseListFragment {
             for(Carrier c: carrier){
                 addressItem.add(c);
             }
+            customListAdapter.setOnClickListner(AddressListFragment.this);
             customListAdapter.setCustomItems(addressItem);
             setListAdapter(customListAdapter);
         }
